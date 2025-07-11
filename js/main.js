@@ -7,17 +7,23 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", () => {
     const scrollY = window.scrollY;
 
+    // Scroll-based shrink + hide
     if (scrollY > 100) {
-      // 🔥 Animate everything on scroll
       product.classList.add("shrink");
       greetingText.classList.add("hide");
       contactBtn.classList.add("scrolled");
-      cta.classList.add("revealed");
     } else {
-      // 🔁 Reset on scroll up
       product.classList.remove("shrink");
       greetingText.classList.remove("hide");
       contactBtn.classList.remove("scrolled");
+    }
+
+    // Reveal CTA when product container is scrolled mostly out
+    const productBottom = product.getBoundingClientRect().bottom;
+
+    if (productBottom < window.innerHeight * 0.4) {
+      cta.classList.add("revealed");
+    } else {
       cta.classList.remove("revealed");
     }
   });

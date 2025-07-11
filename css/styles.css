@@ -1,0 +1,206 @@
+/* Reset & Global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #0f0f0f;
+  color: #fff;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Navbar */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  background: transparent;
+}
+
+.logo {
+  height: 100px;
+}
+
+#contactBtn {
+  border: 1px solid #67c7a8;
+  background: transparent;
+  color: #67c7a8;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+#contactBtn.scrolled {
+  background-color: #67c7a8;
+  color: #0f0f0f;
+}
+
+/* Hero Section */
+.greeting {
+  min-height: 100vh;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  padding-top: 8rem;
+  padding-bottom: 2rem;
+}
+
+.greeting-text {
+  position: relative;
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 2rem;
+  z-index: 6;
+  transition: all 0.6s ease;
+}
+
+.greeting-text h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: capitalize;
+  background: linear-gradient(90deg, #dbc59e, #67c7a8); /* Beige to Mint */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.greeting-text.hide {
+  transform: translateY(-60px);
+  opacity: 0;
+}
+
+/* Product Image Container */
+.product-container {
+  position: relative;
+  width: 80%;
+  transition: all 0.8s ease;
+  z-index: 1;
+  margin-bottom: 1rem;
+}
+
+.product-container.shrink {
+  width: 60%;
+  transform: scale(0.7);
+}
+
+.product-hero {
+  width: 100%;
+  filter: blur(8px);
+  transition: filter 1s ease, transform 0.6s ease;
+  border-radius: 14px;
+  display: block;
+  margin: 0 auto;
+}
+
+.product-container.shrink .product-hero {
+  filter: blur(0);
+}
+
+/* Explore Button */
+.explore-btn.near-product {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  padding: 0.5rem 1.1rem;
+  margin: 1rem auto 0;
+  position: relative;
+  left: -20px; /* 🔥 Move slightly to the left */
+  transform: translateY(60px);
+  opacity: 0;
+  transition: all 0.8s ease;
+  background-color: #dbc59e;
+  color: #0f0f0f;
+  font-weight: bold;
+  border-radius: 4px;
+  text-decoration: none;
+  text-transform: capitalize;
+  border: 1px solid #dbc59e;
+}
+
+.product-container.shrink .explore-btn.near-product {
+  opacity: 1;
+  transform: translateY(0);
+  left: -20px; /* 🔥 Maintain shift after scroll */
+}
+
+.explore-btn.near-product:hover {
+  background: transparent;
+  color: #dbc59e;
+}
+
+/* CTA Section */
+.cta {
+  padding: 2rem 2rem 4rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 0.8s ease;
+  margin-top: -0.5rem;
+}
+
+.cta.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cta h2 {
+  color: #dbc59e;
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+}
+
+.cta p {
+  color: #67c7a8;
+  font-size: 1rem;
+  max-width: 800px;
+  margin: 0 auto 1.5rem auto;
+}
+
+/* Footer */
+footer {
+  padding: 2rem;
+  background: transparent;
+  text-align: center;
+  color: #67c7a8;
+}
+
+footer .slogan {
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Responsive Touch (Optional) */
+@media (max-width: 480px) {
+  .explore-btn.near-product {
+    padding: 0.4rem 0.9rem;
+    font-size: 0.9rem;
+    left: -10px;
+  }
+
+  .greeting-text h1 {
+    font-size: 1.6rem;
+  }
+
+  .cta p {
+    font-size: 0.95rem;
+  }
+}

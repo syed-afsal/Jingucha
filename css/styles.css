@@ -235,8 +235,27 @@ footer .slogan {
   }
 
   .explore-btn.near-product {
-    font-size: 0.9rem;
-    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+    padding: 0.7rem 1.6rem;
+  }
+
+  .product-container {
+    width: 90%;
+  }
+
+  .product-container.shrink {
+    width: 80%;
+    transform: scale(0.88) translateX(2%);
+    margin-bottom: 2rem;
+  }
+
+  .product-hero {
+    transform: translateX(2%);
+  }
+
+  .cta {
+    padding: 2rem 1rem;
+    margin-top: 1rem;
   }
 
   .cta p {

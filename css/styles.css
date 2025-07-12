@@ -263,7 +263,7 @@ footer .slogan {
   }
 
   .product-container.shrink {
-    transform: scale(1.7); /* Still large after shrink */
+    transform: scale(1.8); /* Still large after shrink */
   }
 
   .product-hero {
@@ -277,7 +277,7 @@ footer .slogan {
 
   .product-container.shrink .product-hero {
     filter: blur(0);
-    transform: translateY(1.5rem);
+    transform: translateY(2rem);
   }
 
   .explore-btn.near-product {

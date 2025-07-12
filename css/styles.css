@@ -277,7 +277,7 @@ footer .slogan {
 
   .product-container.shrink .product-hero {
     filter: blur(0);
-    transform: translateY(10);
+    transform: translateY(20);
   }
 
   .explore-btn.near-product {

@@ -317,3 +317,43 @@ footer .slogan {
     padding: 0 1rem;
   }
 }
+@media (max-width: 480px) {
+  .product-container {
+    top: 58vh;
+    transform: scale(1.4);
+  }
+
+  .product-container.shrink {
+    transform: scale(1.05);
+  }
+
+  .leaf {
+    width: 50px;
+    opacity: 0.18;
+    filter: brightness(0.85);
+  }
+
+  .greeting-text h1 {
+    font-size: 1.4rem;
+    line-height: 1.5;
+    padding: 0 1rem;
+  }
+
+  #contactBtn {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .cta {
+    padding: 1rem 0.8rem;
+  }
+
+  .cta p {
+    font-size: 0.95rem;
+  }
+
+  footer {
+    padding: 1.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}

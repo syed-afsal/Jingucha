@@ -99,12 +99,13 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  transform: scale(1.25) translateX(1%);
+  transform: translateX(1%);
+  transform: scale(1.25);
 }
 
 .product-container.shrink {
   width: 60%;
-  transform: scale(0.8) translateX(1%);
+  transform: translateX(1%) scale(0.8);
 }
 
 .product-hero {
@@ -163,6 +164,11 @@ nav {
   transform: translateY(60px);
   transition: all 0.8s ease;
   margin-top: 2rem;
+
+  /* 🌿 Gradient added for premium look (PC) */
+  background: linear-gradient(to bottom, #0f2f1c, #050f08);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .cta.revealed {
@@ -186,9 +192,10 @@ nav {
 /* FOOTER */
 footer {
   padding: 2rem;
-  background: transparent;
+  background: linear-gradient(to top, #050f08, #0f2f1c); /* 🍃 Added premium gradient */
   text-align: center;
   color: #67c7a8;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 footer .slogan {
@@ -220,156 +227,73 @@ footer .slogan {
   transition: transform 0.4s ease;
 }
 
-/* === MOBILE STYLES: max-width 768px === */
+/* RESPONSIVE TWEAKS */
+
+/* 📱 Tablet */
 @media (max-width: 768px) {
-  html, body {
-    overscroll-behavior: none;
-    scroll-behavior: smooth;
-  }
-
-  .greeting {
-    min-height: 200vh; /* 2 scrolls */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .greeting-text {
-    position: sticky;
-    top: 20vh;
-    text-align: center;
-    z-index: 10;
-  }
-
   .greeting-text h1 {
-    font-size: 1.6rem;
-    padding: 0 1rem;
-  }
-
-  .product-container {
-    position: sticky;
-    top: 60vh;
-    width: 90%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 5;
-    transform: scale(2.5rem); /* Bigger than before */
-    transition: all 0.6s ease;
-  }
-
-  .product-container.shrink {
-    transform: scale(2rem); /* Still large after shrink */
-  }
-
-  .product-hero {
-    width: 100%;
-    border-radius: 14px;
-    filter: blur(8px);
-    transition: filter 1s ease, transform 0.6s ease;
-    transform: translateY(0);
-    left: 20%;
-  }
-
-  .product-container.shrink .product-hero {
-    filter: blur(0);
-    transform: translateY(5rem);
+    font-size: 1.8rem;
   }
 
   .explore-btn.near-product {
-    font-size: 0.7rem;
-    padding: 0.4rem 1.2rem;
-    margin-top: 6rem;
-    border-radius: 4px;
-    transform: translateY(60px);
-    opacity: 0;
-    transition: all 0.8s ease;
-    left: 0;
+    font-size: 0.95rem;
+    padding: 0.7rem 1.6rem;
   }
 
-  .product-container.shrink .explore-btn.near-product {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .cta {
-    padding: 2rem 1rem;
-    margin-top: 2rem;
-    opacity: 0;
-    transform: translateY(60px);
-    transition: all 0.8s ease;
-  }
-
-  .cta.revealed {
-    opacity: 1;
-    transform: translateY(0);
+  .product-container.shrink {
+    width: 60%;
+    transform: scale(0.9) translateX(2%);
   }
 
   .cta p {
     font-size: 1rem;
   }
 
+  .cta {
+    background: linear-gradient(to bottom, #0f2f1c, #050f08);
+  }
+
   footer {
-    padding: 2rem 1rem;
-  }
-
-  footer .slogan {
-    font-size: 1rem;
-  }
-
-  #contactBtn {
-    padding: 0.5rem 1rem;
-    font-size: 0.85rem;
-  }
-
-  .logo {
-    height: 60px;
-  }
-
-  /* Fix leaf size for mobile */
-  .leaf {
-    width: 50px;
-    opacity: 0.18;
-  }
-
-  #leaf-container {
-    z-index: 0;
+    background: linear-gradient(to top, #050f08, #0f2f1c);
   }
 }
 
-/* === SMALLER MOBILE SCREENS: max-width 480px === */
+/* 📱 Small Mobile */
 @media (max-width: 480px) {
   .greeting-text h1 {
-    font-size: 1.5rem;
-    padding: 0 1rem;
-  }
-
-  .product-container {
-    width: 92%;
-    left: 10%;
-    transform: scale(2);
-  }
-
-  .product-container.shrink {
-    transform: scale(1.7);
+    font-size: 1.6rem;
   }
 
   .explore-btn.near-product {
-    font-size: 0.7rem;
-    padding: 0.3rem 1.0rem;
-    border-radius: 5px;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.4rem;
+  }
+
+  .product-container {
+    width: 90%;
+  }
+
+  .product-container.shrink {
+    width: 80%;
+    transform: scale(0.9) translateX(2%);
+    margin-bottom: 2rem;
+  }
+
+  .product-hero {
+    transform: translateX(2%);
+  }
+
+  .cta {
+    padding: 2rem 1rem;
+    margin-top: 1rem;
+    background: linear-gradient(to bottom, #0f2f1c, #050f08);
   }
 
   .cta p {
     font-size: 0.95rem;
   }
 
-  .leaf {
-    width: 45px;
-    opacity: 0.15;
+  footer {
+    background: linear-gradient(to top, #050f08, #0f2f1c);
   }
 }

@@ -13,6 +13,7 @@ body {
   scroll-behavior: smooth;
   position: relative;
   z-index: 1;
+  cursor: none; /* Hide the default cursor */
 }
 
 /* NAVBAR */
@@ -99,13 +100,13 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  transform: translateX(1%);
-  transform: scale(1.25);
+  transform: scale(1.25) translateX(1%);
+  transform-origin: center;
 }
 
 .product-container.shrink {
   width: 60%;
-  transform: translateX(1%) scale(0.8);
+  transform: scale(1.1) translateX(1%);
 }
 
 .product-hero {
@@ -164,11 +165,6 @@ nav {
   transform: translateY(60px);
   transition: all 0.8s ease;
   margin-top: 2rem;
-
-  /* 🌿 Gradient added for premium look (PC) */
-  background: linear-gradient(to bottom, #0f2f1c, #050f08);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .cta.revealed {
@@ -177,7 +173,11 @@ nav {
 }
 
 .cta h2 {
-  color: #dbc59e;
+  background: linear-gradient(90deg, #dbc59e, #67c7a8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
   margin-bottom: 1rem;
   text-transform: capitalize;
 }
@@ -192,10 +192,8 @@ nav {
 /* FOOTER */
 footer {
   padding: 2rem;
-  background: linear-gradient(to top, #050f08, #0f2f1c); /* 🍃 Added premium gradient */
+  background: transparent;
   text-align: center;
-  color: #67c7a8;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 footer .slogan {
@@ -204,6 +202,11 @@ footer .slogan {
   letter-spacing: 1px;
   text-transform: capitalize;
   font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(90deg, #dbc59e, #67c7a8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
 }
 
 /* 🍃 LEAF BACKGROUND */
@@ -220,7 +223,7 @@ footer .slogan {
 
 .leaf {
   position: absolute;
-  width: 100px;
+  width: 80px;
   height: auto;
   opacity: 0.2;
   filter: brightness(0.8) saturate(0.9);
@@ -228,40 +231,9 @@ footer .slogan {
 }
 
 /* RESPONSIVE TWEAKS */
-
-/* 📱 Tablet */
 @media (max-width: 768px) {
   .greeting-text h1 {
     font-size: 1.8rem;
-  }
-
-  .explore-btn.near-product {
-    font-size: 0.95rem;
-    padding: 0.7rem 1.6rem;
-  }
-
-  .product-container.shrink {
-    width: 60%;
-    transform: scale(0.9) translateX(2%);
-  }
-
-  .cta p {
-    font-size: 1rem;
-  }
-
-  .cta {
-    background: linear-gradient(to bottom, #0f2f1c, #050f08);
-  }
-
-  footer {
-    background: linear-gradient(to top, #050f08, #0f2f1c);
-  }
-}
-
-/* 📱 Small Mobile */
-@media (max-width: 480px) {
-  .greeting-text h1 {
-    font-size: 1.6rem;
   }
 
   .explore-btn.near-product {
@@ -270,12 +242,37 @@ footer .slogan {
   }
 
   .product-container {
-    width: 90%;
+    width: 95%;
   }
 
   .product-container.shrink {
-    width: 80%;
-    transform: scale(0.9) translateX(2%);
+    width: 90%;
+    transform: scale(1.1) translateX(2%);
+    margin-bottom: 2rem;
+  }
+
+  .cta p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .greeting-text h1 {
+    font-size: 1.6rem;
+  }
+
+  .explore-btn.near-product {
+    font-size: 0.85rem;
+    padding: 0.6rem 1.2rem;
+  }
+
+  .product-container {
+    width: 100%;
+  }
+
+  .product-container.shrink {
+    width: 92%;
+    transform: scale(1.08) translateX(1%);
     margin-bottom: 2rem;
   }
 
@@ -286,14 +283,49 @@ footer .slogan {
   .cta {
     padding: 2rem 1rem;
     margin-top: 1rem;
-    background: linear-gradient(to bottom, #0f2f1c, #050f08);
   }
 
   .cta p {
     font-size: 0.95rem;
   }
+}
 
-  footer {
-    background: linear-gradient(to top, #050f08, #0f2f1c);
+/* ✅ CUSTOM CURSOR */
+#customCursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+/* ✨ SPARKLE ANIMATION */
+@keyframes sparkle-fade {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
   }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+.cursor-sparkle {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle at center, #ffd700 0%, rgba(255, 215, 0, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  filter:
+    drop-shadow(0 0 8px #ffd700)
+    drop-shadow(0 0 12px #ffea00);
+  opacity: 0.8;
+  animation: sparkle-fade 0.8s ease forwards;
+  z-index: 10001;
 }

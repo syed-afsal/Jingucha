@@ -247,33 +247,51 @@ footer .slogan {
 }
 
 /* RESPONSIVE: Small Phones */
-@media (max-width: 420px) {
+@media (max-width: 480px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .greeting {
+    padding-top: 12rem;
+  }
+
   .greeting-text h1 {
-    font-size: 1.5rem;
-    letter-spacing: 0.5px;
+    font-size: 1.4rem;
+    padding: 0 1rem;
   }
 
   .product-container {
-    width: 90%;
-    transform: scale(1.1);
+    width: 100%;
+    transform: scale(2) translateY(-30%);
+    transition: transform 0.6s ease;
+    z-index: 1;
   }
 
   .product-container.shrink {
-    width: 80%;
-    transform: scale(0.8) translateX(2%);
+    width: 90%;
+    transform: scale(0.85) translateY(0%);
   }
 
   .product-hero {
-    transform: translateX(2%);
+    width: 100%;
+    transform: translateY(0%);
+    transition: all 0.6s ease;
+    border-radius: 16px;
+  }
+
+  .product-container.shrink .product-hero {
+    filter: blur(0);
   }
 
   .explore-btn.near-product {
-    font-size: 0.85rem;
-    padding: 0.6rem 1.3rem;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.4rem;
+    margin-top: 1.5rem;
   }
 
   .cta {
-    padding: 2rem 1rem;
+    padding: 1.5rem 1rem;
     margin-top: 1rem;
   }
 
@@ -281,8 +299,9 @@ footer .slogan {
     font-size: 0.95rem;
   }
 
-  .leaf {
-    width: 60px;
+  #leaf-container .leaf {
     opacity: 0.15;
+    width: 70px;
+    height: auto;
   }
 }

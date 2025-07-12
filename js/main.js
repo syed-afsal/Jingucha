@@ -22,9 +22,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (usedCells.has(key)) continue;
     usedCells.add(key);
 
-    const leaf = document.createElement("img");
+   const leaf = document.createElement("img");
     leaf.src = "images/leaf-texture.webp";
     leaf.classList.add("leaf");
+
+// ✅ Ensure visibility on mobile
+    leaf.style.display = "block";
+    leaf.style.pointerEvents = "none"; // prevent blocking taps
+    leaf.style.opacity = "0.2"; // safe default for mobile
 
     leaf.style.top = `${top}%`;
     leaf.style.left = `${left}%`;

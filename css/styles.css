@@ -272,6 +272,7 @@ footer .slogan {
     filter: blur(8px);
     transition: filter 1s ease, transform 0.6s ease;
     transform: translateY(0);
+    left: 20%;
   }
 
   .product-container.shrink .product-hero {
@@ -349,6 +350,7 @@ footer .slogan {
 
   .product-container {
     width: 92%;
+    left: 20%;
     transform: scale(2);
   }
 

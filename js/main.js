@@ -4,10 +4,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const contactBtn = document.getElementById("contactBtn");
   const cta = document.getElementById("cta");
 
-  // 🍃 Leaf generation
+  const isMobile = window.innerWidth <= 480;
+
+  // 🍃 Smart scattered leaf generator
   const leafContainer = document.getElementById("leaf-container");
-  const rows = 6;
-  const cols = 9;
+  const rows = isMobile ? 5 : 6;
+  const cols = isMobile ? 6 : 9;
   const usedCells = new Set();
   const leaves = [];
 
@@ -20,37 +22,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const key = `${Math.floor(top)}-${Math.floor(left)}`;
     if (usedCells.has(key)) continue;
+
     usedCells.add(key);
 
-   const leaf = document.createElement("img");
+    const leaf = document.createElement("img");
     leaf.src = "images/leaf-texture.webp";
     leaf.classList.add("leaf");
 
-// ✅ Ensure visibility on mobile
-    leaf.style.display = "block";
-    leaf.style.pointerEvents = "none"; // prevent blocking taps
-    leaf.style.opacity = "0.2"; // safe default for mobile
-
     leaf.style.top = `${top}%`;
     leaf.style.left = `${left}%`;
-    leaf.style.width = `${80 + Math.random() * 40}px`;
+    leaf.style.width = `${isMobile ? 50 + Math.random() * 20 : 80 + Math.random() * 40}px`;
     leaf.style.transform = `rotate(${Math.random() * 360}deg)`;
 
     leafContainer.appendChild(leaf);
     leaves.push(leaf);
   }
 
-  // ✅ Reduce leaves on mobile
-  if (window.innerWidth <= 768) {
-    const maxLeaves = 12;
-    for (let i = 0; i < leaves.length; i++) {
-      if (i >= maxLeaves) {
-        leaves[i].style.display = "none";
-      }
-    }
-  }
-
-  // 🌀 Scroll-based shrink
+  // 🌿 Scroll-based effects
   window.addEventListener("scroll", () => {
     const scrollY = window.scrollY;
 
@@ -72,48 +60,27 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 🖱️ Cursor hover (PC)
-  document.addEventListener("mousemove", (e) => {
-    leaves.forEach((leaf) => {
-      const rect = leaf.getBoundingClientRect();
-      const dx = e.clientX - (rect.left + rect.width / 2);
-      const dy = e.clientY - (rect.top + rect.height / 2);
-      const distance = Math.sqrt(dx * dx + dy * dy);
+  // 🌀 Cursor proximity animation with auto-reset
+  if (!isMobile) {
+    document.addEventListener("mousemove", (e) => {
+      leaves.forEach((leaf) => {
+        const rect = leaf.getBoundingClientRect();
+        const dx = e.clientX - (rect.left + rect.width / 2);
+        const dy = e.clientY - (rect.top + rect.height / 2);
+        const distance = Math.sqrt(dx * dx + dy * dy);
 
-      const maxDist = 80;
-      if (distance < maxDist) {
-        leaf.style.transition = "transform 0.2s ease";
-        leaf.style.transform = "scale(0.8)";
-        clearTimeout(leaf.resetTimer);
-        leaf.resetTimer = setTimeout(() => {
-          leaf.style.transform = "scale(1)";
-        }, 200);
-      }
+        const maxDist = 80;
+        if (distance < maxDist) {
+          leaf.style.transition = "transform 0.2s ease";
+          leaf.style.transform = "scale(0.8)";
+          clearTimeout(leaf.resetTimer);
+          leaf.resetTimer = setTimeout(() => {
+            leaf.style.transform = "scale(1)";
+          }, 200);
+        }
+      });
     });
-  });
-
-  // 📱 Touch hover (Mobile)
-  document.addEventListener("touchmove", (e) => {
-    const touch = e.touches[0];
-    if (!touch) return;
-
-    leaves.forEach((leaf) => {
-      const rect = leaf.getBoundingClientRect();
-      const dx = touch.clientX - (rect.left + rect.width / 2);
-      const dy = touch.clientY - (rect.top + rect.height / 2);
-      const distance = Math.sqrt(dx * dx + dy * dy);
-
-      const maxDist = 80;
-      if (distance < maxDist) {
-        leaf.style.transition = "transform 0.2s ease";
-        leaf.style.transform = "scale(0.8)";
-        clearTimeout(leaf.resetTimer);
-        leaf.resetTimer = setTimeout(() => {
-          leaf.style.transform = "scale(1)";
-        }, 200);
-      }
-    });
-  });
+  }
 
   // ✨ Ripple pulse on click
   document.addEventListener("click", (e) => {

@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const leafContainer = document.getElementById("leaf-container");
 
   // 🍃 Smart scattered leaf generator
-  const rows = 6;
-  const cols = 9;
+  const rows = window.innerWidth < 768 ? 3 : 6;
+  const cols = window.innerWidth < 768 ? 5 : 9;
   const usedCells = new Set();
   const leaves = [];
 

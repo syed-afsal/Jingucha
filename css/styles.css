@@ -98,12 +98,12 @@ nav {
   flex-direction: column;
   align-items: flex-start;
   transform: translateX(1%);
-  transform: scale(1.25); /* Slightly enlarged initially */
+  transform: scale(1.25);
 }
 
 .product-container.shrink {
   width: 60%;
-  transform: translateX(1%)scale(0.8); /* Shrinks on scroll */
+  transform: translateX(1%) scale(0.8);
 }
 
 .product-hero {
@@ -113,16 +113,12 @@ nav {
   border-radius: 14px;
   display: block;
   margin: 0 auto;
-  transform: translateX(1%); /* 🔥 Shift image slightly to right */
+  transform: translateX(1%);
 }
 
 .product-container.shrink .product-hero {
   filter: blur(0);
-  transform: translateX(0); /* 🔁 Reset to center on scroll */
-}
-
-.product-container.shrink .product-hero {
-  filter: blur(0);
+  transform: translateX(0);
 }
 
 /* Explore Button */
@@ -132,7 +128,7 @@ nav {
   align-items: center;
   width: fit-content;
   padding: 0.8rem 2rem;
-  margin: 1rem auto 0; /* Centered horizontally */
+  margin: 1rem auto 0;
   position: relative;
   transform: translateY(60px);
   opacity: 0;
@@ -145,18 +141,13 @@ nav {
   text-transform: capitalize;
   border: 1px solid #dbc59e;
   font-size: 1rem;
-  left: -2%; /* ❌ Remove any shift */
-}
-
-.product-container.shrink .explore-btn.near-product {
-  opacity: 1;
-  transform: translateY(0);
   left: -2%;
 }
 
 .product-container.shrink .explore-btn.near-product {
   opacity: 1;
   transform: translateY(0);
+  left: -2%;
 }
 
 .explore-btn.near-product:hover {
@@ -166,7 +157,7 @@ nav {
 
 /* CTA Section */
 .cta {
-  padding:2rem;
+  padding: 2rem;
   text-align: center;
   opacity: 0;
   transform: translateY(60px);
@@ -208,57 +199,117 @@ footer .slogan {
   font-family: 'Montserrat', sans-serif;
 }
 
-/* Responsive Touch */
+/* Responsive Enhancements */
 @media (max-width: 768px) {
-  .greeting-text h1 {
-    font-size: 1.8rem;
+  nav {
+    padding: 0.6rem 1rem;
   }
 
-  .explore-btn.near-product {
-    font-size: 0.95rem;
-    padding: 0.7rem 1.6rem;
+  .logo {
+    height: 70px;
+  }
+
+  #contactBtn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .greeting {
+    padding-top: 6rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .greeting-text h1 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+    padding: 0 1rem;
+  }
+
+  .product-container {
+    width: 95%;
+    transform: scale(1.1) translateX(0%);
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
   }
 
   .product-container.shrink {
-    width: 60%;
-    transform: scale(0.7) translateX(2%);
+    width: 85%;
+    transform: scale(0.9) translateX(0%);
+  }
+
+  .product-hero {
+    transform: translateX(0%);
+  }
+
+  .explore-btn.near-product {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.4rem;
+    left: 0;
+  }
+
+  .product-container.shrink .explore-btn.near-product {
+    left: 0;
+  }
+
+  .cta {
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+
+  .cta h2 {
+    font-size: 1.3rem;
   }
 
   .cta p {
+    font-size: 0.95rem;
+    padding: 0 1rem;
+  }
+
+  footer {
+    padding: 1.5rem 1rem;
+  }
+
+  footer .slogan {
     font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
-  .greeting-text h1 {
-    font-size: 1.6rem;
+  .logo {
+    height: 60px;
   }
 
-  .explore-btn.near-product {
-    font-size: 0.95rem;
-    padding: 0.7rem 1.6rem;
+  .greeting-text h1 {
+    font-size: 1.4rem;
+    padding: 0 0.8rem;
   }
 
   .product-container {
-    width: 90%;
+    width: 100%;
+    transform: scale(1.05);
   }
 
   .product-container.shrink {
-    width: 80%;
-    transform: scale(0.88) translateX(2%);
-    margin-bottom: 2rem;
+    width: 90%;
+    transform: scale(0.88);
   }
 
-  .product-hero {
-    transform: translateX(2%);
+  .explore-btn.near-product {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
   }
 
-  .cta {
-    padding: 2rem 1rem;
-    margin-top: 1rem;
+  .cta h2 {
+    font-size: 1.2rem;
   }
 
   .cta p {
+    font-size: 0.9rem;
+    padding: 0 0.8rem;
+  }
+
+  footer .slogan {
     font-size: 0.95rem;
   }
 }

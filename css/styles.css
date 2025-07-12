@@ -258,12 +258,12 @@ footer .slogan {
     align-items: center;
     justify-content: center;
     z-index: 5;
-    transform: scale(2.5); /* Bigger than before */
+    transform: scale(2); /* Bigger than before */
     transition: all 0.6s ease;
   }
 
   .product-container.shrink {
-    transform: scale(2); /* Still large after shrink */
+    transform: scale(1.7); /* Still large after shrink */
   }
 
   .product-hero {
@@ -272,6 +272,7 @@ footer .slogan {
     filter: blur(8px);
     transition: filter 1s ease, transform 0.6s ease;
     transform: translateY(0);
+    right: 2%;
   }
 
   .product-container.shrink .product-hero {
@@ -348,11 +349,11 @@ footer .slogan {
 
   .product-container {
     width: 92%;
-    transform: scale(2.5);
+    transform: scale(2);
   }
 
   .product-container.shrink {
-    transform: scale(2);
+    transform: scale(1.7);
   }
 
   .explore-btn.near-product {

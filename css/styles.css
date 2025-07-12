@@ -277,7 +277,7 @@ footer .slogan {
 
   .product-container.shrink .product-hero {
     filter: blur(0);
-    left: 5%;
+    right: 20%;
     transform: translateY(0);
   }
 

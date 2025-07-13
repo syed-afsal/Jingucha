@@ -220,39 +220,24 @@ footer .slogan {
 }
 
 @media (max-width: 768px) {
+  /* Reset mobile view */
   .greeting {
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     padding-top: 4rem;
     padding-bottom: 0;
+    overflow: hidden;
     position: relative;
-  }
-
-  .product-container {
-    position: absolute;
-    bottom: -20%;
-    left: 50%;
-    transform: translateX(-50%) scale(1.2);
-    width: 100%;
-    max-width: 100vw;
-    z-index: 0;
-  }
-
-  .product-hero {
-    border-radius: 16px;
-    filter: blur(8px);
-  }
-
-  .product-container.shrink {
-    transform: translateX(-50%) scale(0.9);
-    width: 80%;
+    text-align: center;
   }
 
   .greeting-text {
-    position: relative;
     z-index: 2;
-    max-width: 90%;
-    margin-bottom: 1rem;
+    position: relative;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
   }
 
   .greeting-text h1 {
@@ -260,11 +245,67 @@ footer .slogan {
     line-height: 1.4;
   }
 
+  .product-container {
+    position: absolute;
+    bottom: -10%;
+    left: 50%;
+    transform: translateX(-50%) scale(1.35);
+    width: 120%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .product-hero {
+    width: 100%;
+    filter: blur(8px);
+    transform: none;
+    border-radius: 12px;
+  }
+
+  .product-container.shrink {
+    position: relative;
+    transform: translateX(0%) scale(1);
+    width: 90%;
+    margin: 0 auto 1rem;
+    bottom: auto;
+    left: auto;
+    pointer-events: auto;
+  }
+
+  .product-container.shrink .product-hero {
+    filter: blur(0);
+  }
+
   .explore-btn.near-product {
     font-size: 0.9rem;
-    padding: 0.6rem 1.2rem;
+    padding: 0.6rem 1.4rem;
     margin-top: 1rem;
   }
+
+  .cta {
+    padding: 2rem 1rem;
+    margin-top: 1rem;
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 0.8s ease;
+  }
+
+  .cta.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Limit leaf clutter */
+  .leaf {
+    width: 60px !important;
+    opacity: 0.1 !important;
+  }
+
+  #leaf-container img:nth-child(n+7) {
+    display: none;
+  }
+}
+
 }@media (max-width: 480px) {
   .greeting-text h1 {
     font-size: 1.6rem;

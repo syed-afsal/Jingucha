@@ -219,33 +219,53 @@ footer .slogan {
   transition: transform 0.3s ease;
 }
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
-  .greeting-text h1 {
-    font-size: 1.8rem;
+  .greeting {
+    min-height: 100vh;
+    justify-content: center;
+    padding-top: 4rem;
+    padding-bottom: 0;
+    position: relative;
   }
-  .explore-btn.near-product {
-    font-size: 0.95rem;
-    padding: 0.7rem 1.6rem;
-  }
+
   .product-container {
-    width: 90%;
-    transform: scale(1.1) translateX(2%);
+    position: absolute;
+    bottom: -20%;
+    left: 50%;
+    transform: translateX(-50%) scale(1.2);
+    width: 100%;
+    max-width: 100vw;
+    z-index: 0;
   }
+
+  .product-hero {
+    border-radius: 16px;
+    filter: blur(8px);
+  }
+
   .product-container.shrink {
-    width: 85%;
-    transform: scale(1.25) translateX(2%);
+    transform: translateX(-50%) scale(0.9);
+    width: 80%;
   }
-  .cta {
-    padding: 2rem 1rem;
+
+  .greeting-text {
+    position: relative;
+    z-index: 2;
+    max-width: 90%;
+    margin-bottom: 1rem;
+  }
+
+  .greeting-text h1 {
+    font-size: 1.6rem;
+    line-height: 1.4;
+  }
+
+  .explore-btn.near-product {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
     margin-top: 1rem;
   }
-  .cta p {
-    font-size: 0.95rem;
-  }
-}
-
-@media (max-width: 480px) {
+}@media (max-width: 480px) {
   .greeting-text h1 {
     font-size: 1.6rem;
   }

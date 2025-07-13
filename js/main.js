@@ -6,8 +6,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const leafContainer = document.getElementById("leaf-container");
   const customCursor = document.getElementById("customCursor");
 
-  const rows = 6;
-  const cols = 8;
+  let rows,cols;
+  if (window.innerWidth < 768) {
+    rows = 3;
+    cols = 4;
+  } else { 
+    rows = 6;
+    cols = 8;
+  }
   const usedCells = new Set();
   const leaves = [];
 

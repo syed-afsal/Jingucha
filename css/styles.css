@@ -228,6 +228,7 @@ footer .slogan {
     align-items: center;
     padding: 0;
     position: relative;
+    overflow: hidden;
     text-align: center;
   }
 
@@ -237,11 +238,12 @@ footer .slogan {
     line-height: 1.4;
   }
 
+  /* Hero image revealed only from top 1/4 */
   .product-container {
     position: absolute;
     bottom: -25%;
     left: 50%;
-    transform: translateX(-50%) scale(1.25);
+    transform: translateX(-50%) scale(1.2);
     width: 120%;
     z-index: 1;
     pointer-events: none;
@@ -266,12 +268,11 @@ footer .slogan {
   .explore-btn.near-product {
     font-size: 0.95rem;
     padding: 0.7rem 1.6rem;
-    transform: translateY(60px);
   }
 
   .product-container.shrink .explore-btn.near-product {
-    transform: translateY(0);
     opacity: 1;
+    transform: translateY(0);
   }
 
   .cta {
@@ -282,12 +283,17 @@ footer .slogan {
   .cta p {
     font-size: 1rem;
   }
+
+  .leaf {
+    /* smaller leaf icons to reduce clutter */
+    width: 60px !important;
+    opacity: 0.1 !important;
+  }
 }
 
 @media (max-width: 480px) {
   .greeting-text h1 {
     font-size: 1.6rem;
-    padding: 0 1rem;
   }
 
   .product-container {
@@ -299,6 +305,7 @@ footer .slogan {
   .product-container.shrink {
     width: 95%;
     transform: scale(1) translateX(0);
+    margin: 1.5rem auto;
   }
 
   .explore-btn.near-product {
@@ -314,7 +321,6 @@ footer .slogan {
     font-size: 1rem;
   }
 }
-
 /* ✅ CUSTOM CURSOR - ONLY ON PC */
 #customCursor {
   position: fixed;

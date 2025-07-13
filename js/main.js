@@ -6,23 +6,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const leafContainer = document.getElementById("leaf-container");
   const customCursor = document.getElementById("customCursor");
 
-  const isMobile = window.innerWidth < 768;
-  let rows = isMobile ? 2 : 5;
-  let cols = isMobile ? 3 : 6;
-
+  const isMobile = window.innerWidth < 769;
+  const rows = isMobile ? 2 : 5;
+  const cols = isMobile ? 3 : 6;
   const usedCells = new Set();
   const leaves = [];
 
-  // 🌿 Create scattered leaves (less for mobile)
+  // 🍃 Create scattered leaves
   for (let i = 0; i < rows * cols; i++) {
     const row = Math.floor(i / cols);
     const col = i % cols;
 
-    const top = row * (100 / rows) + Math.random() * (100 / rows - 15);
-    const left = col * (100 / cols) + Math.random() * (100 / cols - 15);
+    const top = row * (100 / rows) + Math.random() * (100 / rows - 10);
+    const left = col * (100 / cols) + Math.random() * (100 / cols - 10);
     const key = `${Math.floor(top)}-${Math.floor(left)}`;
     if (usedCells.has(key)) continue;
-
     usedCells.add(key);
 
     const leaf = document.createElement("img");
@@ -30,64 +28,41 @@ document.addEventListener("DOMContentLoaded", () => {
     leaf.classList.add("leaf");
     leaf.style.top = `${top}%`;
     leaf.style.left = `${left}%`;
-    leaf.style.width = `${isMobile ? 60 + Math.random() * 20 : 80 + Math.random() * 40}px`;
+    leaf.style.width = `${60 + Math.random() * 30}px`;
     leaf.style.transform = `rotate(${Math.random() * 360}deg)`;
 
     leafContainer.appendChild(leaf);
     leaves.push(leaf);
   }
 
-  // ✨ Create sparkle on leaves
-  function createGlitter(leaf) {
-    const glitter = document.createElement("div");
-    glitter.classList.add("glitter");
-
-    const leafRect = leaf.getBoundingClientRect();
-    const containerRect = leafContainer.getBoundingClientRect();
-    const top = leafRect.top - containerRect.top + Math.random() * leafRect.height;
-    const left = leafRect.left - containerRect.left + Math.random() * leafRect.width;
-
-    glitter.style.top = `${top}px`;
-    glitter.style.left = `${left}px`;
-
-    leafContainer.appendChild(glitter);
-    setTimeout(() => glitter.remove(), 600);
-  }
-
-  // 🖱️ Custom Cursor Sparkle (PC only)
+  // ✨ Custom cursor sparkle (PC only)
   function createCursorSparkle(x, y) {
     const sparkle = document.createElement("div");
     sparkle.classList.add("cursor-sparkle");
     sparkle.style.top = `${y}px`;
     sparkle.style.left = `${x}px`;
-
     document.body.appendChild(sparkle);
     setTimeout(() => sparkle.remove(), 800);
   }
 
-  // 🖱️ Cursor Movement + Leaf Reaction (PC only)
+  // 🖱️ Cursor & leaf interactions (PC only)
   if (!isMobile) {
     document.addEventListener("mousemove", (e) => {
       customCursor.style.display = "block";
       customCursor.style.top = `${e.clientY}px`;
       customCursor.style.left = `${e.clientX}px`;
 
-      if (Math.random() < 0.3) {
-        createCursorSparkle(
-          e.clientX + (Math.random() * 10 - 5),
-          e.clientY + (Math.random() * 10 - 5)
-        );
+      if (Math.random() < 0.25) {
+        createCursorSparkle(e.clientX + (Math.random() * 10 - 5), e.clientY + (Math.random() * 10 - 5));
       }
 
-      // Leaf scale on proximity
       leaves.forEach((leaf) => {
         const rect = leaf.getBoundingClientRect();
         const dx = e.clientX - (rect.left + rect.width / 2);
         const dy = e.clientY - (rect.top + rect.height / 2);
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        const maxDist = 80;
-        if (distance < maxDist) {
+        if (distance < 80) {
           leaf.style.transition = "transform 0.2s ease";
           leaf.style.transform = "scale(0.8)";
           clearTimeout(leaf.resetTimer);
@@ -99,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 🔁 Scroll Shrink Effects
+  // 🪄 Scroll reveal effects
   window.addEventListener("scroll", () => {
     const scrollY = window.scrollY;
 
@@ -121,16 +96,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 🌱 Leaf Click Ripple
+  // 🖱️ Click pulse effect on leaves (lightweight)
   document.addEventListener("click", (e) => {
+    if (isMobile) return;
+
     leaves.forEach((leaf) => {
       const rect = leaf.getBoundingClientRect();
       const dx = e.clientX - (rect.left + rect.width / 2);
       const dy = e.clientY - (rect.top + rect.height / 2);
       const distance = Math.sqrt(dx * dx + dy * dy);
 
-      const radius = 100;
-      if (distance < radius) {
+      if (distance < 100) {
         leaf.style.transition = "transform 0.2s ease";
         leaf.style.transform = "scale(1.3)";
         setTimeout(() => {
@@ -141,13 +117,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ✨ Periodic Glitter
+  // ✨ Random sparkle on leaves (optional, safe for mobile)
   setInterval(() => {
     if (leaves.length === 0) return;
     const sparkleCount = isMobile ? 1 : 3;
     for (let i = 0; i < sparkleCount; i++) {
-      const randomLeaf = leaves[Math.floor(Math.random() * leaves.length)];
-      createGlitter(randomLeaf);
+      const leaf = leaves[Math.floor(Math.random() * leaves.length)];
+      const sparkle = document.createElement("div");
+      sparkle.classList.add("cursor-sparkle");
+
+      const rect = leaf.getBoundingClientRect();
+      sparkle.style.top = `${rect.top + Math.random() * rect.height}px`;
+      sparkle.style.left = `${rect.left + Math.random() * rect.width}px`;
+
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 800);
     }
-  }, 800);
+  }, 1000);
 });

@@ -99,12 +99,13 @@ nav {
   margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
+  transform: translateX(30px);
   align-items: flex-start;
-  transform: scale(1.5) translateX(1%);
+  transform: scale(1.5) translateX(30px);
 }
 .product-container.shrink {
   width: 60%;
-  transform: scale(0.95) translateX(1%);
+  transform: scale(0.9) translateX(30px);
 }
 .product-hero {
   width: 100%;
@@ -230,7 +231,7 @@ footer .slogan {
   }
 
   .greeting-text {
-    margin-top: 40px;
+    margin-top: 0;
     margin-bottom: 1.5rem;
     max-width: 95%;
   }
@@ -241,15 +242,16 @@ footer .slogan {
   }
 
   .product-container {
-    width: 90%;
-    transform: scale(1.15) translateY(5%);
+    width: 100%;
+    transform: scale(1.2) translateY(25%);
     transition: transform 0.8s ease;
+    margin-top: auto;
     align-items: center;
   }
 
   .product-container.shrink {
     width: 80%;
-    transform: scale(0.85) translateY(5%);
+    transform: scale(1) translateY(0%);
     margin-bottom: 2rem;
   }
 
@@ -288,13 +290,13 @@ footer .slogan {
   }
 
   .product-container {
-    width: 92%;
-    transform: scale(1.2) translateY(6%);
+    width: 100%;
+    transform: scale(1.55) translateY(30%);
   }
 
   .product-container.shrink {
-    width: 85%;
-    transform: scale(0.87) translateY(5%);
+    width: 90%;
+    transform: scale(1) translateY(0%);
     margin-bottom: 2rem;
   }
 

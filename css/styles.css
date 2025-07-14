@@ -689,7 +689,6 @@ nav {
   .product-container {
     width: 95vw !important;
     max-width: 95%;
-    margin-top: 20vh !important;
     margin: 4vh auto 0 !important;
     transform: scale(1.7) !important;
     left: 0;

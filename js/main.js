@@ -201,3 +201,29 @@ document.addEventListener("DOMContentLoaded", () => {
   // Start the application
   init();
 });
+function setupScrollEffects() {
+  window.addEventListener("scroll", () => {
+    const scrollY = window.scrollY;
+    const triggerPoint = isMobile ? 30 : 100; // Reduced for mobile
+
+    if (scrollY > triggerPoint) {
+      if (product) product.classList.add("shrink");
+      if (greetingText) greetingText.classList.add("hide");
+      if (aboutBtn) aboutBtn.classList.add("scrolled");
+    } else {
+      if (product) product.classList.remove("shrink");
+      if (greetingText) greetingText.classList.remove("hide");
+      if (aboutBtn) aboutBtn.classList.remove("scrolled");
+    }
+
+    // Reliable CTA reveal
+    if (cta) {
+      const ctaPosition = cta.getBoundingClientRect().top;
+      if (ctaPosition < window.innerHeight * 0.7) { // Trigger earlier
+        cta.classList.add("revealed");
+      } else {
+        cta.classList.remove("revealed");
+      }
+    }
+  });
+}

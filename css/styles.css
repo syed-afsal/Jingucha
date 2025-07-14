@@ -40,7 +40,7 @@ nav {
 }
 
 .logo {
-  height: 100px;
+  height: 80px;
 }
 
 #aboutBtn {
@@ -503,4 +503,28 @@ footer .slogan {
   opacity: 0.8;
   animation: sparkle-fade 0.8s ease forwards;
   z-index: 10001;
+}
+/* Add this to your existing styles */
+.greeting {
+  padding-top: 20vh !important; /* Increase vertical spacing */
+  justify-content: flex-start; /* Align content at top */
+}
+
+.greeting-text {
+  margin-top: 5vh; /* Add space above text */
+}
+
+/* For mobile devices */
+@media (max-width: 768px) {
+  .greeting {
+    padding-top: 25vh !important; /* More space on mobile */
+  }
+  
+  .greeting-text {
+    margin-top: 3vh; /* Less space on mobile */
+  }
+  
+  .product-container {
+    margin-top: 8vh !important; /* Space between text and image */
+  }
 }

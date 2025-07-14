@@ -549,8 +549,9 @@ footer .slogan {
   .product-container {
     width: 100% !important;
     height: 35vh !important; /* Increased from 25vh */
-    margin-top: 5vh !important;
-    transform: scale(1.5) !important;
+    margin-top: 10vh !important;
+    transform: scale(1.8) !important;
+    align-items: center !important;
   }
 
   /* Scale up hero image - scrolled state */
@@ -559,10 +560,12 @@ footer .slogan {
     height: 60vh !important; /* Increased from 50vh */
     transform: scale(1.2) !important;
     margin-top: 2vh !important;
+    align-items: center !important;
   }
   
   .product-hero {
     transform: scale(1.15) !important;
+    align-items: center !important;
   }
 }
 

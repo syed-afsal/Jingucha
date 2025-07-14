@@ -4,10 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Jingucha® | From Shell to Soil</title>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   
-  <!-- Fonts and Styles -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <!-- StyleSheet -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Icons (optional for future use) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
 
@@ -15,70 +20,71 @@
   <img id="customCursor" src="images/custom-cursor.png" alt="cursor" />
 
   <!-- Leaf Container -->
-  <div id="leaf-container"></div>
+  <div id="leaf-container" aria-hidden="true"></div>
 
-  <!-- Navbar -->
-  <nav>
-    <a href="about.html">
-      <img src="images/logo.png" alt="Jingucha Logo" class="logo" />
-    </a>
-    <button id="aboutBtn">About</button>
+  <!-- ================= NAVBAR ================= -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="about.html" class="nav-logo">
+        <img src="images/logo.png" alt="Jingucha Logo" />
+      </a>
+      <div class="nav-actions">
+        <button id="aboutBtn" class="nav-btn">About</button>
+        <button id="chatBtn" class="nav-btn">Let's Chat</button>
+      </div>
+    </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="greeting">
+  <!-- ============== HERO SECTION ============== -->
+  <header class="hero-section">
     <div class="greeting-text" id="greetingText">
-      <h1>Immerse Yourself In The Refined Rhythm Of Nature's Harmony</h1>
+      <h1>Immerse Yourself In The Refined Rhythm Of Nature’s Harmony</h1>
     </div>
 
     <div class="product-container" id="productContainer">
       <img src="images/mockup.webp" alt="Plantivinia" class="product-hero" />
       <a href="product.html" class="explore-btn near-product">Explore Products</a>
     </div>
-  </section>
+  </header>
 
-  <!-- CTA Section -->
+  <!-- ============== CTA SECTION ============== -->
   <section class="cta" id="cta">
     <h2>Rhythm Of Nature</h2>
-    <p>Jingucha is a celebration of nature’s quiet brilliance — a brand where sustainability is not just a promise, but a philosophy. Rooted in purity, we craft timeless products that honour the Earth while elevating your lifestyle.</p>
+    <p>
+      Jingucha® is a celebration of nature’s quiet brilliance — a brand where sustainability is not just a promise, but a philosophy. Rooted in purity, we craft timeless products that honour the Earth while elevating your lifestyle.
+    </p>
   </section>
 
-  <!-- Footer -->
+  <!-- ============== FOOTER ============== -->
   <footer>
     <p class="slogan">Crafted with care. Powered by nature.</p>
   </footer>
 
-  <!-- Scripts -->
-  <script src="js/main.js"></script>
-  
-  <!-- Modals -->
-  <div id="aboutModal" class="modal">
+  <!-- ============== ABOUT MODAL ============== -->
+  <div id="aboutModal" class="modal" role="dialog" aria-modal="true">
     <div class="modal-content">
       <span class="close-btn" id="closeAboutModal">&times;</span>
       <h2>About Jingucha</h2>
-      <p>Jingucha is a celebration of nature's quiet brilliance. Our philosophy is rooted in purity and sustainability, crafting products that honor the Earth while elevating your lifestyle.</p>
-      <p>Founded in 2020, we've been committed to ethical sourcing and environmentally friendly practices. Each product is carefully designed to bring you closer to nature's harmony.</p>
+      <p>Jingucha® is a celebration of nature’s quiet brilliance. Our philosophy is rooted in purity and sustainability, crafting products that honor the Earth while elevating your lifestyle.</p>
+      <p>Founded in 2020, we’ve been committed to ethical sourcing and environmentally friendly practices. Each product is carefully designed to bring you closer to nature’s harmony.</p>
     </div>
   </div>
 
-  <div id="contactModal" class="modal">
+  <!-- ============== CONTACT MODAL ============== -->
+  <div id="contactModal" class="modal" role="dialog" aria-modal="true">
     <div class="modal-content">
       <span id="closeModal" class="close-btn">&times;</span>
       <h2>Contact Us</h2>
       <form>
-        <input type="text" placeholder="Your Name" required>
-        <input type="email" placeholder="Your Email" required>
+        <input type="text" placeholder="Your Name" required />
+        <input type="email" placeholder="Your Email" required />
         <textarea placeholder="Your Message" required></textarea>
         <button type="submit">Send Message</button>
       </form>
     </div>
   </div>
 
-  <!-- Let's Chat button -->
-  <button id="chatBtn">
-    <span class="icon">💬</span>
-    Let's Chat
-  </button>
-
+  <!-- ============== SCRIPTS ============== -->
+  <script src="js/main.js"></script>
 </body>
 </html>

@@ -41,6 +41,7 @@ nav {
 
 .logo {
   height: 80px;
+  transition: all 0.3s ease;
 }
 
 #aboutBtn {
@@ -66,6 +67,7 @@ nav {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 15rem;
   padding: 0 1rem 2rem;
   text-align: center;
 }
@@ -91,6 +93,13 @@ nav {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-fill-color: transparent;
+  
+  /* Ensure 3 lines max */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .greeting-text.hide {
@@ -98,16 +107,16 @@ nav {
   opacity: 0;
 }
 
-/* PRODUCT IMAGE - REVERTED TO ORIGINAL PC STYLE */
+/* PRODUCT IMAGE */
 .product-container {
   position: relative;
   width: 80%;
-  transition: all 0.8s ease;
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 1;
   margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   transform: scale(1.25) translateX(1%);
   transform-origin: center;
 }
@@ -120,12 +129,12 @@ nav {
 .product-hero {
   width: 100%;
   filter: blur(8px);
-  transition: filter 1s ease, transform 0.6s ease;
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   border-radius: 14px;
   display: block;
   margin: 0 auto;
   transform: translateX(1%);
-  object-fit: contain; /* Prevent cropping */
+  object-fit: contain;
 }
 
 .product-container.shrink .product-hero {
@@ -144,7 +153,7 @@ nav {
   position: relative;
   transform: translateY(60px);
   opacity: 0;
-  transition: all 0.8s ease;
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   background-color: #dbc59e;
   color: #0f0f0f;
   font-weight: bold;
@@ -172,7 +181,7 @@ nav {
   text-align: center;
   opacity: 0;
   transform: translateY(60px);
-  transition: all 0.8s ease;
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   margin-top: 2rem;
 }
 
@@ -205,6 +214,7 @@ footer {
   text-align: center;
   position: relative;
   z-index: 10;
+  padding-bottom: 100px; /* Space for chat button */
 }
 
 footer .slogan {
@@ -220,7 +230,7 @@ footer .slogan {
   text-fill-color: transparent;
 }
 
-/* 🍃 VERY DULL LEAF BACKGROUND */
+/* LEAF BACKGROUND */
 #leaf-container {
   position: fixed;
   top: 0;
@@ -237,115 +247,14 @@ footer .slogan {
   width: 100px;
   height: auto;
   opacity: 0.25;
-  transition: transform 0.4s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   filter: brightness(0.6) saturate(0.15) grayscale(0.6);
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .greeting {
-    min-height: 100vh;
-    justify-content: center;
-    padding-top: 0;
-  }
-  
-  .greeting-text {
-    margin: 0 auto 2rem;
-  }
-  
-  .greeting-text h1 {
-    font-size: 1.8rem;
-    margin-top: -20vh; /* Push greeting up */
-  }
-
-  .explore-btn.near-product {
-    font-size: 0.95rem;
-    padding: 0.7rem 1.6rem;
-  }
-
-  /* MOBILE-SPECIFIC HERO IMAGE STYLES */
-  .product-container {
-    width: 95%;
-    height: 25vh; /* 1/4 of viewport */
-    transform: scale(1) translateX(1%);
-    margin-top: 5vh; /* Position below greeting */
-  }
-  
-  .product-hero {
-    height: 100%;
-    width: auto;
-    max-width: 100%;
-    object-fit: contain; /* Ensure no cropping */
-  }
-  
-  .product-container.shrink {
-    width: 85%;
-    height: 50vh; /* 50% of viewport */
-    transform: scale(1) translateX(1%);
-    margin-top: 0;
-  }
-
-  .cta {
-    padding: 2rem 1rem;
-  }
-  
-  .cta p {
-    font-size: 1rem;
-  }
-  
-  footer {
-    padding: 1.5rem;
-    padding-bottom: 80px; /* Space for chat button */
-  }
-}
-
-@media (max-width: 480px) {
-  .logo {
-    height: 70px;
-  }
-  
-  .greeting-text h1 {
-    font-size: 1.6rem;
-    line-height: 1.3;
-    padding: 0 1rem;
-    margin-top: -15vh; /* Adjust greeting position */
-  }
-
-  .explore-btn.near-product {
-    font-size: 0.9rem;
-    padding: 0.6rem 1.4rem;
-  }
-
-  .product-container {
-    width: 95%;
-    height: 25vh;
-  }
-
-  .product-container.shrink {
-    width: 85%;
-    height: 50vh;
-    margin-bottom: 1.5rem;
-  }
-
-  .cta {
-    padding: 1.5rem 1rem;
-    margin-top: 1rem;
-  }
-
-  .cta p {
-    font-size: 0.95rem;
-  }
-  
-  footer {
-    padding: 1rem;
-    padding-bottom: 80px;
-  }
 }
 
 /* CHAT BUTTON */
 #chatBtn {
   position: fixed;
-  bottom: 30px;
+  bottom: 50px; /* Raised position */
   right: 30px;
   background-color: #67c7a8;
   color: #0f0f0f;
@@ -359,7 +268,7 @@ footer .slogan {
   gap: 0.5rem;
   box-shadow: 0 0 10px rgba(103, 199, 168, 0.4);
   cursor: pointer;
-  z-index: 1000;
+  z-index: 1001; /* Above footer */
   animation: pulse 2s infinite;
   transition: transform 0.3s ease;
 }
@@ -408,7 +317,7 @@ footer .slogan {
   width: 90%;
   color: #fff;
   position: relative;
-  animation: fadeIn 0.4s ease;
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .modal-content h2 {
@@ -480,7 +389,7 @@ footer .slogan {
   border-radius: 50%;
 }
 
-/* ✨ CURSOR SPARKLES */
+/* CURSOR SPARKLES */
 @keyframes sparkle-fade {
   0% {
     transform: scale(1);
@@ -504,91 +413,124 @@ footer .slogan {
   animation: sparkle-fade 0.8s ease forwards;
   z-index: 10001;
 }
-/* Add this to your existing styles */
-.greeting {
-  padding-top: 20vh !important; /* Increase vertical spacing */
-  justify-content: flex-start; /* Align content at top */
-}
 
-.greeting-text {
-  margin-top: 5vh; /* Add space above text */
-}
-
-/* For mobile devices */
+/* ===== MOBILE OPTIMIZATION ===== */
 @media (max-width: 768px) {
-  .greeting {
-    padding-top: 25vh !important; /* More space on mobile */
+  /* Header adjustments */
+  nav {
+    padding: 0.8rem 1.2rem !important;
   }
   
-  .greeting-text {
-    margin-top: 3vh; /* Less space on mobile */
-  }
-  
-  .product-container {
-    margin-top: 8vh !important; /* Space between text and image */
-  }
-}
-/* Add this to your existing mobile media queries */
-@media (max-width: 768px) {
-  /* Scale down logo */
   .logo {
-    height: 50px !important;
+    height: 45px !important;
   }
 
-  /* Move greeting down */
+  /* Content positioning */
   .greeting {
-    padding-top: 15vh !important;
+    padding-top: 20vh !important;
     justify-content: flex-start;
   }
   
   .greeting-text {
-    margin-top: 5vh;
+    margin-top: 3vh !important;
+    padding: 0 1rem;
+  }
+  
+  .greeting-text h1 {
+    font-size: 1.7rem !important;
+    line-height: 1.4 !important;
+    margin-top: 0 !important;
   }
 
-  /* Scale up hero image - initial state */
+  /* Hero image scaling */
   .product-container {
     width: 100% !important;
-    height: 35vh !important; /* Increased from 25vh */
-    margin-top: 10vh !important;
-    transform: scale(1.8) !important;
-    align-items: center !important;
+    height: 28vh !important;
+    margin-top: 8vh !important;
+    transform: scale(1.3) !important;
   }
 
-  /* Scale up hero image - scrolled state */
   .product-container.shrink {
-    width: 90% !important;
-    height: 60vh !important; /* Increased from 50vh */
-    transform: scale(1.2) !important;
-    margin-top: 2vh !important;
-    align-items: center !important;
+    width: 85% !important;
+    height: 52vh !important;
+    transform: scale(1.1) !important;
+    margin-top: 4vh !important;
   }
   
   .product-hero {
-    transform: scale(1.15) !important;
-    align-items: center !important;
+    transform: scale(1.05) !important;
+  }
+
+  /* Button positioning */
+  #aboutBtn {
+    position: static !important;
+    transform: none !important;
+    margin-right: 0 !important;
+    padding: 0.4rem 0.8rem !important;
+    font-size: 0.9rem !important;
+  }
+
+  .explore-btn.near-product {
+    left: 0 !important;
+    transform: translateY(0) !important;
+    margin: 2rem auto 0 !important;
+    padding: 0.7rem 1.5rem !important;
+    font-size: 0.9rem !important;
+  }
+  
+  /* CTA adjustments */
+  .cta {
+    padding: 1.5rem 1rem !important;
+  }
+  
+  .cta p {
+    font-size: 1rem !important;
+  }
+  
+  footer {
+    padding: 1.5rem !important;
   }
 }
 
 @media (max-width: 480px) {
-  /* Further adjustments for small mobile */
   .logo {
-    height: 40px !important;
+    height: 38px !important;
   }
   
   .greeting {
-    padding-top: 12vh !important;
-  }
-  
-  .product-container {
-    height: 30vh !important;
-  }
-  
-  .product-container.shrink {
-    height: 55vh !important;
+    padding-top: 18vh !important;
   }
   
   .greeting-text h1 {
-    font-size: 1.8rem !important; /* Slightly larger text */
+    font-size: 1.5rem !important;
+    line-height: 1.3 !important;
+    padding: 0 0.5rem !important;
+  }
+  
+  .product-container {
+    height: 25vh !important;
+    transform: scale(1.4) !important;
+    margin-top: 6vh !important;
+  }
+  
+  .product-container.shrink {
+    height: 48vh !important;
     margin-top: 2vh !important;
   }
+  
+  /* Footer spacing */
+  footer {
+    padding: 1rem !important;
+  }
+}
+
+/* ===== ABOUT BUTTON POSITION FIX ===== */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#aboutBtn {
+  margin-left: auto;
 }

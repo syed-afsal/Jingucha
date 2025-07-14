@@ -11,9 +11,6 @@
 </head>
 <body>
 
-  <!-- ✅ Custom Cursor (Visible only on PC via CSS) -->
-  <img id="customCursor" src="images/custom-cursor.png" alt="cursor" />
-
   <!-- 🍃 Leaf Container -->
   <div id="leaf-container"></div>
 
@@ -22,7 +19,7 @@
     <a href="about.html">
       <img src="images/logo.png" alt="Jingucha Logo" class="logo" />
     </a>
-    <button id="contactBtn">Contact</button>
+    <button id="aboutBtn">About</button> <!-- Changed from Contact to About -->
   </nav>
 
   <!-- Hero Section -->
@@ -50,5 +47,25 @@
 
   <!-- Scripts -->
   <script src="js/main.js"></script>
+
+<!-- Contact Modal -->
+<div id="contactModal" class="modal">
+  <div class="modal-content">
+    <span id="closeModal" class="close-btn">&times;</span>
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</div>
+
+<button id="chatBtn">
+  <span class="icon">💬</span>
+  Let's Chat
+</button>
+
 </body>
 </html>

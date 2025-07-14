@@ -534,3 +534,270 @@ nav {
 #aboutBtn {
   margin-left: auto;
 }
+/* ===== MOBILE OPTIMIZATION ===== */
+@media (max-width: 768px) {
+  /* Header adjustments */
+  nav {
+    padding: 0.8rem 1.2rem !important;
+  }
+  
+  .logo {
+    height: 45px !important;
+  }
+
+  /* Move greeting text up */
+  .greeting {
+    padding-top: 12vh !important; /* Reduced from 20vh */
+    justify-content: flex-start;
+    margin-top: 0 !important; /* Remove desktop margin */
+  }
+  
+  .greeting-text {
+    margin-top: 2vh !important; /* Reduced from 3vh */
+    padding: 0 1rem;
+  }
+  
+  .greeting-text h1 {
+    font-size: 1.7rem !important;
+    line-height: 1.4 !important;
+    margin-top: 0 !important;
+  }
+
+  /* Center and scale hero image */
+  .product-container {
+    width: 100% !important;
+    height: 28vh !important;
+    margin-top: 5vh !important; /* Reduced from 8vh */
+    transform: scale(1.2) !important; /* Reduced from 1.3 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .product-container.shrink {
+    width: 90% !important; /* Better aspect ratio */
+    height: 50vh !important; /* Reduced from 52vh */
+    transform: scale(1) !important;
+    margin-top: 3vh !important; /* Reduced from 4vh */
+  }
+  
+  .product-hero {
+    transform: scale(1) !important; /* Remove extra scaling */
+    width: 95%; /* Better fit */
+    margin: 0 auto; /* Center horizontally */
+  }
+
+  /* Fix about button positioning */
+  #aboutBtn {
+    position: relative !important;
+    transform: none !important;
+    margin-left: auto !important;
+    padding: 0.4rem 0.8rem !important;
+    font-size: 0.9rem !important;
+    right: 0 !important;
+  }
+
+  /* Explore button adjustments */
+  .explore-btn.near-product {
+    left: 0 !important;
+    transform: translateY(0) !important;
+    margin: 1.5rem auto 0 !important; /* Reduced space */
+    padding: 0.7rem 1.5rem !important;
+    font-size: 0.9rem !important;
+  }
+  
+  /* CTA adjustments */
+  .cta {
+    padding: 1.5rem 1rem !important;
+    margin-top: 1rem !important;
+  }
+  
+  .cta p {
+    font-size: 1rem !important;
+  }
+  
+  footer {
+    padding: 1.5rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    height: 38px !important;
+  }
+  
+  .greeting {
+    padding-top: 10vh !important; /* Reduced from 18vh */
+  }
+  
+  .greeting-text h1 {
+    font-size: 1.5rem !important;
+    line-height: 1.3 !important;
+    padding: 0 0.5rem !important;
+  }
+  
+  .product-container {
+    height: 25vh !important;
+    transform: scale(1.2) !important; /* Reduced from 1.4 */
+    margin-top: 4vh !important; /* Reduced from 6vh */
+  }
+  
+  .product-container.shrink {
+    height: 45vh !important; /* Reduced from 48vh */
+    margin-top: 2vh !important;
+  }
+  
+  /* Footer spacing */
+  footer {
+    padding: 1rem !important;
+  }
+}
+
+/* ===== SMOOTHER ANIMATIONS ===== */
+@media (max-width: 768px) {
+  .product-container, 
+  .product-hero,
+  .greeting-text {
+    transition: all 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) !important;
+  }
+  
+  .explore-btn.near-product,
+  .cta {
+    transition: all 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) !important;
+  }
+}
+/* ===== MOBILE LAYOUT FIXES ===== */
+@media (max-width: 768px) {
+  /* Lock page width and prevent horizontal scroll */
+  html, body {
+    width: 100%;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Container constraints */
+  .greeting {
+    width: 100vw;
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    box-sizing: border-box;
+  }
+
+  /* Hero image width control */
+  .product-container {
+    width: 95vw !important;
+    max-width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+  }
+
+  .product-container.shrink {
+    width: 85vw !important;
+    max-width: 85%;
+  }
+
+  /* About button positioning */
+  nav {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    width: 100vw;
+    max-width: 100%;
+  }
+
+  #aboutBtn {
+    margin-left: auto;
+    margin-right: 0;
+    right: 1rem;
+  }
+
+  /* Content centering */
+  .greeting-text,
+  .product-hero,
+  .explore-btn.near-product {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Prevent any element from causing overflow */
+  * {
+    max-width: 100%;
+  }
+}
+
+/* ===== PRECISE MOBILE ADJUSTMENTS ===== */
+@media (max-width: 768px) {
+  /* Header adjustments */
+  nav {
+    padding: 0.8rem 1rem !important; /* Reduced padding */
+  }
+  
+  .logo {
+    height: 45px !important;
+    max-width: 120px; /* Prevent logo overflow */
+  }
+
+  /* Greeting text positioning */
+  .greeting {
+    padding-top: 10vh !important; /* Higher position */
+    margin-top: 0 !important;
+  }
+  
+  .greeting-text {
+    margin-top: 2vh !important;
+    padding: 0 0.5rem !important; /* Reduced padding */
+  }
+
+  /* Hero image scaling */
+  .product-container {
+    height: 30vh !important;
+    margin-top: 4vh !important; /* Reduced space */
+    transform: scale(1.15) !important; /* More subtle zoom */
+  }
+
+  .product-container.shrink {
+    height: 50vh !important;
+    margin-top: 2vh !important;
+    transform: scale(1) !important;
+  }
+
+  /* Button adjustments */
+  .explore-btn.near-product {
+    margin: 1rem auto 0 !important;
+    width: 90% !important;
+    max-width: 280px;
+  }
+}
+
+/* ===== SMALL MOBILE OPTIMIZATION ===== */
+@media (max-width: 480px) {
+  .greeting {
+    padding-top: 8vh !important;
+  }
+  
+  .product-container {
+    height: 28vh !important;
+    transform: scale(1.1) !important;
+  }
+  
+  .product-container.shrink {
+    height: 45vh !important;
+  }
+}
+
+/* ===== SMOOTHER SCROLL BEHAVIOR ===== */
+@media (max-width: 768px) {
+  html {
+    scroll-snap-type: y proximity;
+  }
+  
+  .greeting,
+  .product-container.shrink,
+  .cta {
+    scroll-snap-align: start;
+  }
+}

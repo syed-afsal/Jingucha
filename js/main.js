@@ -1,12 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
   const product = document.getElementById("productContainer");
   const greetingText = document.querySelector(".greeting-text");
-  const aboutBtn = document.getElementById("aboutBtn"); // Changed from contactBtn
+  const aboutBtn = document.getElementById("aboutBtn");
   const cta = document.getElementById("cta");
   const leafContainer = document.getElementById("leaf-container");
   const chatBtn = document.getElementById("chatBtn");
   const contactModal = document.getElementById("contactModal");
   const closeModal = document.getElementById("closeModal");
+  const customCursor = document.getElementById("customCursor");
 
   // Determine if it's a mobile device
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -17,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const usedCells = new Set();
   const leaves = [];
 
-  // Create leaf elements scattered with light green + ash mix filter
+  // Create leaf elements
   for (let i = 0; i < rows * cols; i++) {
     const row = Math.floor(i / cols);
     const col = i % cols;
@@ -43,6 +44,81 @@ document.addEventListener("DOMContentLoaded", () => {
     leaves.push(leaf);
   }
 
+  // Leaf interactions
+  function setupLeafInteractions() {
+    // Leaf proximity scale effect (desktop only)
+    if (!isMobile) {
+      document.addEventListener("mousemove", (e) => {
+        leaves.forEach((leaf) => {
+          const rect = leaf.getBoundingClientRect();
+          const dx = e.clientX - (rect.left + rect.width / 2);
+          const dy = e.clientY - (rect.top + rect.height / 2);
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          const maxDist = 80;
+          if (distance < maxDist) {
+            leaf.style.transition = "transform 0.2s ease";
+            leaf.style.transform = "scale(0.8)";
+            clearTimeout(leaf.resetTimer);
+            leaf.resetTimer = setTimeout(() => {
+              leaf.style.transform = "scale(1)";
+            }, 200);
+          }
+        });
+      });
+    }
+
+    // Leaf click animation (both desktop and mobile)
+    document.addEventListener("click", (e) => {
+      const radius = isMobile ? 50 : 100;
+      
+      leaves.forEach((leaf) => {
+        const rect = leaf.getBoundingClientRect();
+        const dx = e.clientX - (rect.left + rect.width / 2);
+        const dy = e.clientY - (rect.top + rect.height / 2);
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < radius) {
+          leaf.style.transition = "transform 0.2s ease";
+          leaf.style.transform = "scale(1.3)";
+          setTimeout(() => {
+            leaf.style.transform = "scale(1)";
+            leaf.style.transition = "transform 0.4s ease";
+          }, 150);
+        }
+      });
+    });
+  }
+
+  // Cursor effects (desktop only)
+  function setupCursorEffects() {
+    if (isMobile) return;
+    
+    customCursor.style.display = "block";
+    
+    document.addEventListener("mousemove", (e) => {
+      customCursor.style.top = `${e.clientY}px`;
+      customCursor.style.left = `${e.clientX}px`;
+
+      if (Math.random() < 0.3) {
+        createCursorSparkle(e.clientX + (Math.random() * 10 - 5), e.clientY + (Math.random() * 10 - 5));
+      }
+    });
+  }
+
+  // Create cursor sparkle effect
+  function createCursorSparkle(x, y) {
+    const sparkle = document.createElement("div");
+    sparkle.classList.add("cursor-sparkle");
+    sparkle.style.top = `${y}px`;
+    sparkle.style.left = `${x}px`;
+    document.body.appendChild(sparkle);
+
+    setTimeout(() => {
+      sparkle.remove();
+    }, 800);
+  }
+
   // Scroll effects
   window.addEventListener("scroll", () => {
     const scrollY = window.scrollY;
@@ -66,30 +142,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Leaf interactions only on desktop
-  if (!isMobile) {
-    // Ripple pulse on click - smaller radius on mobile
-    document.addEventListener("click", (e) => {
-      const radius = isMobile ? 50 : 100; // Smaller radius on mobile
-      
-      leaves.forEach((leaf) => {
-        const rect = leaf.getBoundingClientRect();
-        const dx = e.clientX - (rect.left + rect.width / 2);
-        const dy = e.clientY - (rect.top + rect.height / 2);
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < radius) {
-          leaf.style.transition = "transform 0.2s ease";
-          leaf.style.transform = "scale(1.3)";
-          setTimeout(() => {
-            leaf.style.transform = "scale(1)";
-            leaf.style.transition = "transform 0.4s ease";
-          }, 150);
-        }
-      });
-    });
-  }
-
   // Chat button opens modal
   chatBtn.addEventListener("click", () => {
     contactModal.style.display = "block";
@@ -106,4 +158,8 @@ document.addEventListener("DOMContentLoaded", () => {
       contactModal.style.display = "none";
     }
   });
+
+  // Initialize effects
+  setupLeafInteractions();
+  setupCursorEffects();
 });

@@ -4,14 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Jingucha® | From Shell to Soil</title>
-
+  
   <!-- Fonts and Styles -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-  <!-- 🍃 Leaf Container -->
+  <!-- Custom Cursor -->
+  <img id="customCursor" src="images/custom-cursor.png" alt="cursor" />
+
+  <!-- Leaf Container -->
   <div id="leaf-container"></div>
 
   <!-- Navbar -->
@@ -19,7 +22,7 @@
     <a href="about.html">
       <img src="images/logo.png" alt="Jingucha Logo" class="logo" />
     </a>
-    <button id="aboutBtn">About</button> <!-- Changed from Contact to About -->
+    <button id="aboutBtn">About</button> <!-- Changed to About -->
   </nav>
 
   <!-- Hero Section -->
@@ -47,25 +50,26 @@
 
   <!-- Scripts -->
   <script src="js/main.js"></script>
-
-<!-- Contact Modal -->
-<div id="contactModal" class="modal">
-  <div class="modal-content">
-    <span id="closeModal" class="close-btn">&times;</span>
-    <h2>Contact Us</h2>
-    <form>
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
-      <textarea placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
+  
+  <!-- Contact Modal -->
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal" class="close-btn">&times;</span>
+      <h2>Contact Us</h2>
+      <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
   </div>
-</div>
 
-<button id="chatBtn">
-  <span class="icon">💬</span>
-  Let's Chat
-</button>
+  <!-- Let's Chat button moved after footer -->
+  <button id="chatBtn">
+    <span class="icon">💬</span>
+    Let's Chat
+  </button>
 
 </body>
 </html>

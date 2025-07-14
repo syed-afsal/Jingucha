@@ -15,6 +15,16 @@ body {
   z-index: 1;
 }
 
+/* Hide cursor on touch devices */
+@media (pointer: coarse) {
+  body {
+    cursor: default;
+  }
+  #customCursor {
+    display: none !important;
+  }
+}
+
 /* NAVBAR */
 nav {
   position: fixed;
@@ -172,7 +182,7 @@ nav {
 }
 
 .cta h2 {
-  background: linear-gradient(90deg, #dbc59e, #67c7a8); /* Gradient added */
+  background: linear-gradient(90deg, #dbc59e, #67c7a8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -201,7 +211,7 @@ footer .slogan {
   letter-spacing: 1px;
   text-transform: capitalize;
   font-family: 'Montserrat', sans-serif;
-  background: linear-gradient(90deg, #dbc59e, #67c7a8); /* Gradient added */
+  background: linear-gradient(90deg, #dbc59e, #67c7a8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -234,6 +244,7 @@ footer .slogan {
   .greeting {
     padding-top: 6rem;
     min-height: 90vh;
+    justify-content: flex-start;
   }
   
   .greeting-text {
@@ -252,20 +263,27 @@ footer .slogan {
 
   .product-container {
     width: 90%;
-    transform: scale(1.1) translateX(1%);
+    transform: scale(1.1) translate(1%, 30%);
+    margin-top: 10vh;
   }
   
   .product-container.shrink {
     width: 70%;
-    transform: scale(0.85) translateX(2%);
+    transform: scale(0.85) translate(1%, 0);
+    margin-top: 0;
   }
 
+  .cta {
+    padding: 2rem 1rem;
+  }
+  
   .cta p {
     font-size: 1rem;
   }
   
   footer {
     padding: 1.5rem;
+    padding-bottom: 80px; /* Space for chat button */
   }
 }
 
@@ -295,18 +313,14 @@ footer .slogan {
 
   .product-container {
     width: 95%;
-    transform: scale(1.1) translateX(1%);
-    margin-bottom: 0;
+    transform: scale(1.1) translate(1%, 30%);
+    margin-top: 15vh;
   }
 
   .product-container.shrink {
     width: 85%;
-    transform: scale(0.9) translateX(2%);
+    transform: scale(0.9) translate(1%, 0);
     margin-bottom: 1.5rem;
-  }
-
-  .product-hero {
-    transform: translateX(2%);
   }
 
   .cta {
@@ -320,6 +334,7 @@ footer .slogan {
   
   footer {
     padding: 1rem;
+    padding-bottom: 80px; /* Space for chat button */
   }
 }
 
@@ -390,6 +405,14 @@ footer .slogan {
   animation: fadeIn 0.4s ease;
 }
 
+/* Center modal on mobile */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 90%;
+    margin: 20% auto;
+  }
+}
+
 .modal-content h2 {
   margin-bottom: 1rem;
   color: #dbc59e;
@@ -438,7 +461,41 @@ footer .slogan {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Remove custom cursor styles */
+/* CUSTOM CURSOR (without glow) */
 #customCursor {
-  display: none !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  display: none;
+  border-radius: 50%;
+}
+
+/* ✨ CURSOR SPARKLES — GOLD ✨ */
+@keyframes sparkle-fade {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+.cursor-sparkle {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle at center, #ffd700 0%, rgba(255, 215, 0, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  filter: drop-shadow(0 0 6px #ffd700) drop-shadow(0 0 12px #ffcc00);
+  opacity: 0.8;
+  animation: sparkle-fade 0.8s ease forwards;
+  z-index: 10001;
 }

@@ -681,7 +681,7 @@ nav {
     max-width: 100%;
     padding: 0 1rem;
     box-sizing: border-box;
-    margin-top: 0;
+    margin-top: 10vh !important; /* Adjusted for better fit */
     padding-top: 30vh !important; /* Higher position */
   }
 

@@ -681,7 +681,7 @@ nav {
     max-width: 100%;
     padding: 0 1rem;
     box-sizing: border-box;
-    margin-top: 10vh !important; /* Adjusted for better fit */
+    margin-top: 0;
     padding-top: 30vh !important; /* Higher position */
   }
 
@@ -698,7 +698,7 @@ nav {
   .product-container.shrink {
     width: 85vw !important;
     max-width: 85%;
-    transform: scale(1.3) !important;
+    transform: scale(1.1) !important;
     height: 50vh !important;
     margin-top: 2vh !important;
   }

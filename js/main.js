@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Get all elements
   const product = document.getElementById("productContainer");
   const greetingText = document.querySelector(".greeting-text");
   const aboutBtn = document.getElementById("aboutBtn");
@@ -6,13 +7,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const leafContainer = document.getElementById("leaf-container");
   const chatBtn = document.getElementById("chatBtn");
   const contactModal = document.getElementById("contactModal");
+  const aboutModal = document.getElementById("aboutModal");
   const closeModal = document.getElementById("closeModal");
+  const closeAboutModal = document.getElementById("closeAboutModal");
   const customCursor = document.getElementById("customCursor");
 
   // Determine if it's a mobile device
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   
-  // Leaf grid configuration - fewer leaves on mobile
+  // Leaf grid configuration
   const rows = isMobile ? 4 : 6;
   const cols = isMobile ? 5 : 8;
   const usedCells = new Set();
@@ -36,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     leaf.classList.add("leaf");
     leaf.style.top = `${top}%`;
     leaf.style.left = `${left}%`;
-    leaf.style.width = `${(isMobile ? 60 : 80) + Math.random() * 40}px`;
+    leaf.style.width = `${(isMobile ? 40 : 80) + Math.random() * 40}px`;
     leaf.style.transform = `rotate(${Math.random() * 360}deg)`;
     leaf.style.filter = "brightness(0.85) saturate(0.5) hue-rotate(90deg)";
 
@@ -94,6 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function setupCursorEffects() {
     if (isMobile) return;
     
+    document.body.style.cursor = "none";
     customCursor.style.display = "block";
     
     document.addEventListener("mousemove", (e) => {
@@ -119,47 +123,81 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 800);
   }
 
-  // Scroll effects
-  window.addEventListener("scroll", () => {
-    const scrollY = window.scrollY;
+  // Scroll effects with reliable CTA reveal
+  function setupScrollEffects() {
+    window.addEventListener("scroll", () => {
+      const scrollY = window.scrollY;
+      const triggerPoint = isMobile ? 50 : 100;
 
-    if (scrollY > 100) {
-      product.classList.add("shrink");
-      greetingText.classList.add("hide");
-      aboutBtn.classList.add("scrolled");
-    } else {
-      product.classList.remove("shrink");
-      greetingText.classList.remove("hide");
-      aboutBtn.classList.remove("scrolled");
-    }
+      if (scrollY > triggerPoint) {
+        if (product) product.classList.add("shrink");
+        if (greetingText) greetingText.classList.add("hide");
+        if (aboutBtn) aboutBtn.classList.add("scrolled");
+      } else {
+        if (product) product.classList.remove("shrink");
+        if (greetingText) greetingText.classList.remove("hide");
+        if (aboutBtn) aboutBtn.classList.remove("scrolled");
+      }
 
-    // Reveal CTA when product is 40% scrolled
-    const productBottom = product.getBoundingClientRect().bottom;
-    if (productBottom < window.innerHeight * 0.4) {
-      cta.classList.add("revealed");
-    } else {
-      cta.classList.remove("revealed");
-    }
-  });
+      // Reliable CTA reveal
+      if (cta) {
+        const ctaPosition = cta.getBoundingClientRect().top;
+        if (ctaPosition < window.innerHeight * 0.8) {
+          cta.classList.add("revealed");
+        } else {
+          cta.classList.remove("revealed");
+        }
+      }
+    });
+  }
 
-  // Chat button opens modal
-  chatBtn.addEventListener("click", () => {
-    contactModal.style.display = "block";
-  });
+  // Modal handling
+  function setupModals() {
+    // About button opens modal
+    aboutBtn.addEventListener("click", () => {
+      aboutModal.style.display = "flex";
+    });
 
-  // Close modal
-  closeModal.addEventListener("click", () => {
-    contactModal.style.display = "none";
-  });
+    // Chat button opens contact modal
+    chatBtn.addEventListener("click", () => {
+      contactModal.style.display = "flex";
+    });
 
-  // Close modal when clicking outside
-  window.addEventListener("click", (e) => {
-    if (e.target === contactModal) {
+    // Close modals
+    closeModal.addEventListener("click", () => {
       contactModal.style.display = "none";
-    }
-  });
+    });
 
-  // Initialize effects
-  setupLeafInteractions();
-  setupCursorEffects();
+    closeAboutModal.addEventListener("click", () => {
+      aboutModal.style.display = "none";
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener("click", (e) => {
+      if (e.target === contactModal) {
+        contactModal.style.display = "none";
+      }
+      if (e.target === aboutModal) {
+        aboutModal.style.display = "none";
+      }
+    });
+  }
+
+  // Initialize all functionality
+  function init() {
+    setupLeafInteractions();
+    setupCursorEffects();
+    setupScrollEffects();
+    setupModals();
+    
+    // Force CTA to show on mobile if not visible
+    if (isMobile && cta) {
+      setTimeout(() => {
+        cta.classList.add("revealed");
+      }, 500);
+    }
+  }
+
+  // Start the application
+  init();
 });

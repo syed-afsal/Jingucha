@@ -528,3 +528,64 @@ footer .slogan {
     margin-top: 8vh !important; /* Space between text and image */
   }
 }
+/* Add this to your existing mobile media queries */
+@media (max-width: 768px) {
+  /* Scale down logo */
+  .logo {
+    height: 50px !important;
+  }
+
+  /* Move greeting down */
+  .greeting {
+    padding-top: 15vh !important;
+    justify-content: flex-start;
+  }
+  
+  .greeting-text {
+    margin-top: 5vh;
+  }
+
+  /* Scale up hero image - initial state */
+  .product-container {
+    width: 100% !important;
+    height: 35vh !important; /* Increased from 25vh */
+    margin-top: 5vh !important;
+    transform: scale(1.1) !important;
+  }
+
+  /* Scale up hero image - scrolled state */
+  .product-container.shrink {
+    width: 90% !important;
+    height: 60vh !important; /* Increased from 50vh */
+    transform: scale(1) !important;
+    margin-top: 2vh !important;
+  }
+  
+  .product-hero {
+    transform: scale(1.05) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Further adjustments for small mobile */
+  .logo {
+    height: 40px !important;
+  }
+  
+  .greeting {
+    padding-top: 12vh !important;
+  }
+  
+  .product-container {
+    height: 30vh !important;
+  }
+  
+  .product-container.shrink {
+    height: 55vh !important;
+  }
+  
+  .greeting-text h1 {
+    font-size: 1.8rem !important; /* Slightly larger text */
+    margin-top: 2vh !important;
+  }
+}

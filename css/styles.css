@@ -550,19 +550,19 @@ footer .slogan {
     width: 100% !important;
     height: 35vh !important; /* Increased from 25vh */
     margin-top: 5vh !important;
-    transform: scale(2) !important;
+    transform: scale(1.5) !important;
   }
 
   /* Scale up hero image - scrolled state */
   .product-container.shrink {
     width: 90% !important;
     height: 60vh !important; /* Increased from 50vh */
-    transform: scale(1.5) !important;
+    transform: scale(1.2) !important;
     margin-top: 2vh !important;
   }
   
   .product-hero {
-    transform: scale(1.5) !important;
+    transform: scale(1.15) !important;
   }
 }
 

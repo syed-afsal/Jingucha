@@ -15,7 +15,7 @@
             --light-text: #1a1a1a;
             --light-accent: #3fe399;
             --light-secondary: #f5f0e1;
-            --light-nav-bg: rgba(252, 250, 247, 0.92);
+            --light-nav-bg: rgba(252, 250, 247, 0.85); /* Reduced opacity */
             --light-glass: rgba(255, 255, 255, 0.25);
             --light-beige: #f0e6d8;
             
@@ -24,7 +24,7 @@
             --dark-text: #f0f0f0;
             --dark-accent: #3fe399;
             --dark-secondary: #1e1e1e;
-            --dark-nav-bg: rgba(18, 18, 18, 0.92);
+            --dark-nav-bg: rgba(18, 18, 18, 0.85); /* Reduced opacity */
             --dark-glass: rgba(0, 0, 0, 0.25);
             --dark-beige: #2a241c;
             
@@ -95,20 +95,8 @@
         }
         
         .logo {
-            height: 60px;
+            height: 50px;
             transition: all 0.3s ease;
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--accent);
-            letter-spacing: 2px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo-icon {
-            margin-right: 10px;
-            font-size: 24px;
         }
         
         .nav-right {
@@ -133,6 +121,8 @@
         #aboutBtn:hover {
             background: var(--accent);
             color: var(--bg);
+            transform: translateY(-3px);
+            letter-spacing: 0.5px;
         }
         
         .theme-toggle {
@@ -171,6 +161,10 @@
             background: linear-gradient(135deg, var(--beige) 0%, var(--bg) 100%);
         }
         
+        .dark-theme .hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, var(--dark-bg) 100%);
+        }
+        
         .hero-content {
             text-align: center;
             z-index: 10;
@@ -200,7 +194,7 @@
             opacity: 0.9;
         }
         
-        .hero-btn {
+        .btn {
             background: transparent;
             color: var(--text);
             border: 1px solid var(--accent);
@@ -217,9 +211,11 @@
             text-transform: uppercase;
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
+            display: inline-block;
+            text-decoration: none;
         }
         
-        .hero-btn:hover {
+        .btn:hover {
             background: var(--accent);
             color: var(--bg);
             box-shadow: var(--shadow-accent);
@@ -278,7 +274,7 @@
         
         .product-image {
             width: 100%;
-            max-width: 500px;
+            max-width: 550px; /* Increased size */
             height: auto;
             filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.3));
             transform: translateY(0);
@@ -311,27 +307,6 @@
             margin-bottom: 3rem;
             line-height: 1.8;
             font-weight: 300;
-        }
-        
-        .product-btn {
-            background: var(--accent);
-            color: var(--bg);
-            border: none;
-            padding: 1.2rem 3.5rem;
-            font-size: 1.1rem;
-            font-family: 'DM Sans', sans-serif;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        
-        .product-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-accent);
-            letter-spacing: 3px;
         }
         
         /* Brand Story Section */
@@ -367,6 +342,7 @@
             position: relative;
             transform: translateY(50px);
             opacity: 0;
+            animation: float 6s ease-in-out infinite;
         }
         
         .story-image img {
@@ -457,28 +433,6 @@
             color: var(--text);
             opacity: 0.8;
             line-height: 1.7;
-        }
-        
-        .cta-btn {
-            background: transparent;
-            color: var(--text);
-            border: 1px solid var(--accent);
-            padding: 1.2rem 3.5rem;
-            font-size: 1.1rem;
-            font-family: 'DM Sans', sans-serif;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        
-        .cta-btn:hover {
-            background: var(--accent);
-            color: var(--bg);
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-accent);
         }
         
         /* Footer */
@@ -673,12 +627,14 @@
             cursor: pointer;
             z-index: 1001;
             animation: pulse 2s infinite;
-            transition: transform 0.3s ease;
+            transition: var(--transition);
             font-family: 'DM Sans', sans-serif;
         }
         
         #chatBtn:hover {
-            transform: scale(1.05);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-accent);
+            letter-spacing: 0.5px;
         }
         
         #chatBtn .icon {
@@ -772,7 +728,7 @@
             color: var(--bg);
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             width: 100%;
             font-family: 'DM Sans', sans-serif;
             font-size: 1rem;
@@ -854,6 +810,18 @@
             100% { transform: rotate(360deg); }
         }
         
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
         /* Scroll to top button */
         .scroll-top {
             position: fixed;
@@ -909,23 +877,6 @@
             letter-spacing: 0.5px;
         }
         
-        /* Floating animation */
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-            100% {
-                transform: translateY(0px);
-            }
-        }
-        
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-        
         /* Responsive Design */
         @media (max-width: 992px) {
             .product-container {
@@ -947,6 +898,10 @@
                 padding: 1.2rem 5%;
             }
             
+            .logo {
+                height: 40px;
+            }
+            
             .hero {
                 padding-top: 6rem;
             }
@@ -955,7 +910,7 @@
                 font-size: 2.5rem;
             }
             
-            .hero-btn, .product-btn {
+            .btn {
                 padding: 1rem 2.5rem;
                 font-size: 1rem;
             }
@@ -972,6 +927,10 @@
                 flex-direction: column;
                 gap: 1.5rem;
             }
+            
+            .story-image {
+                height: 400px;
+            }
         }
         
         @media (max-width: 576px) {
@@ -980,8 +939,7 @@
             }
             
             .logo {
-                height: auto;
-                font-size: 22px;
+                height: 35px;
             }
             
             .theme-toggle {
@@ -1024,6 +982,10 @@
             .modal-content {
                 padding: 1.5rem;
             }
+            
+            .story-image {
+                height: 350px;
+            }
         }
     </style>
 </head>
@@ -1043,8 +1005,7 @@
     
     <!-- Sticky Glassmorphic Navbar -->
     <nav class="navbar">
-        <img src="images/logo.png" class="logo">
-        </img>
+        <img src="images/logo.png" class="logo" alt="Jingucha Logo">
         <div class="nav-right">
             <button id="aboutBtn">About</button>
             <button class="theme-toggle" id="themeToggle">
@@ -1060,7 +1021,7 @@
             <h1 class="hero-text">Awaken Your <span class="accent-color">Senses</span></h1>
             <div class="divider"></div>
             <p class="hero-subtext">Our Essence, Redefined</p>
-            <button class="hero-btn" id="revealBtn">Reveal Nature's Legacy</button>
+            <button class="btn" id="revealBtn">Reveal Nature's Legacy</button>
         </div>
     </section>
     
@@ -1074,12 +1035,12 @@
                 <div class="divider"></div>
                 <p class="product-desc">A premium plant-based calcium powder crafted sustainably from eggshells, enhanced with nature's finest botanicals for holistic nourishment. Our unique formula combines science and nature to deliver unparalleled wellness benefits.</p>
                 <p class="product-desc">Each batch is carefully formulated to deliver the perfect balance of minerals and nutrients, supporting bone health, muscle function, and overall vitality.</p>
-                <button class="product-btn">Own the Ritual</button>
+                <a href="https://wa.me/919445172773?text=I'm%20interested%20in%20buying%20Plantivinia" class="btn" target="_blank">Own the Ritual</a>
             </div>
             
             <!-- Product image -->
             <div class="product-image-container">
-                <img src="images/mockup.webp" alt="Plantivinia Product" class="product-image elevated-card floating">
+                <img src="images/mockup.webp" alt="Plantivinia Product" class="product-image elevated-card">
             </div>
         </div>
     </section>
@@ -1108,8 +1069,8 @@
                 </div>
             </div>
             
-            <div class="story-image elevated-card" id="founderImage">
-                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Jingucha Founders" class="floating">
+            <div class="story-image elevated-card floating" id="founderImage">
+                <img src="images/mockup-back.png" alt="Jingucha Founders">
             </div>
         </div>
     </section>
@@ -1118,7 +1079,7 @@
     <section class="cta textured-bg" id="cta">
         <h2>Rhythm Of <span class="accent-color">Nature</span></h2>
         <p>Jingucha is a celebration of nature’s quiet brilliance — a brand where sustainability is not just a promise, but a philosophy. Rooted in purity, we craft timeless products that honour the Earth while elevating your lifestyle.</p>
-        <button class="cta-btn">Join Our Journey</button>
+        <button class="btn">Join Our Journey</button>
     </section>
     
     <!-- Footer -->
@@ -1202,11 +1163,11 @@
         <div class="modal-content">
             <span id="closeModal" class="close-btn">&times;</span>
             <h2>Contact Us</h2>
-            <form>
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <textarea placeholder="Your Message" required></textarea>
-                <button type="submit">Send Message</button>
+            <form id="contactForm" action="mailto:jingucha22@gmail.com" method="post" enctype="text/plain">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
             </form>
         </div>
     </div>
@@ -1279,7 +1240,7 @@
             gsap.to(".product-image", {
                 scrollTrigger: {
                     trigger: ".product",
-                    start: "top 60%",
+                    start: "top 80%", // Fixed trigger position
                     end: "bottom top",
                     toggleActions: "play none none none"
                 },
@@ -1323,7 +1284,7 @@
                 });
             });
             
-            // Reveal button scroll to product
+            // Reveal button scroll to product - Fixed functionality
             document.getElementById('revealBtn').addEventListener('click', () => {
                 gsap.to(window, {
                     duration: 1.8,

@@ -11,20 +11,22 @@
     <style>
         :root {
             /* Light Theme */
-            --light-bg: #fdfdfd;
-            --light-text: #181818;
-            --light-accent: #00d9b8;
+            --light-bg: #fcfaf7;
+            --light-text: #1a1a1a;
+            --light-accent: #3fe399;
             --light-secondary: #f5f0e1;
-            --light-nav-bg: rgba(253, 253, 253, 0.85);
-            --light-glass: rgba(255, 255, 255, 0.2);
+            --light-nav-bg: rgba(252, 250, 247, 0.92);
+            --light-glass: rgba(255, 255, 255, 0.25);
+            --light-beige: #f0e6d8;
             
             /* Dark Theme */
-            --dark-bg: #0f0f0f;
-            --dark-text: #f5f5f5;
-            --dark-accent: #00d9b8;
-            --dark-secondary: #1a1a1a;
-            --dark-nav-bg: rgba(15, 15, 15, 0.85);
-            --dark-glass: rgba(0, 0, 0, 0.2);
+            --dark-bg: #121212;
+            --dark-text: #f0f0f0;
+            --dark-accent: #3fe399;
+            --dark-secondary: #1e1e1e;
+            --dark-nav-bg: rgba(18, 18, 18, 0.92);
+            --dark-glass: rgba(0, 0, 0, 0.25);
+            --dark-beige: #2a241c;
             
             /* Current Theme - Defaults to Light */
             --bg: var(--light-bg);
@@ -33,11 +35,12 @@
             --secondary: var(--light-secondary);
             --nav-bg: var(--light-nav-bg);
             --glass: var(--light-glass);
+            --beige: var(--light-beige);
             
             --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.05);
             --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.1);
-            --shadow-accent: 0 0 25px rgba(0, 217, 184, 0.3);
+            --shadow-accent: 0 0 25px rgba(121, 210, 170, 0.862);
         }
         
         .dark-theme {
@@ -47,6 +50,7 @@
             --secondary: var(--dark-secondary);
             --nav-bg: var(--dark-nav-bg);
             --glass: var(--dark-glass);
+            --beige: var(--dark-beige);
         }
         
         * {
@@ -64,6 +68,7 @@
             line-height: 1.6;
             font-weight: 300;
             letter-spacing: 0.5px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="%238bc2a9" stroke-width="0.5" stroke-opacity="0.05" /></svg>');
         }
         
         /* Glassmorphic Navbar */
@@ -92,6 +97,18 @@
         .logo {
             height: 60px;
             transition: all 0.3s ease;
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 24px;
         }
         
         .nav-right {
@@ -151,7 +168,7 @@
             position: relative;
             overflow: hidden;
             padding: 0 5%;
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--bg) 100%);
+            background: linear-gradient(135deg, var(--beige) 0%, var(--bg) 100%);
         }
         
         .hero-content {
@@ -179,6 +196,8 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            color: var(--text);
+            opacity: 0.9;
         }
         
         .hero-btn {
@@ -342,11 +361,12 @@
             flex: 1;
             min-width: 300px;
             height: 500px;
-            background: linear-gradient(45deg, var(--accent), var(--secondary));
             border-radius: 20px;
             overflow: hidden;
             box-shadow: var(--shadow-lg);
             position: relative;
+            transform: translateY(50px);
+            opacity: 0;
         }
         
         .story-image img {
@@ -584,7 +604,7 @@
         .newsletter-form input:focus {
             outline: none;
             border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(0, 217, 184, 0.2);
+            box-shadow: 0 0 0 2px rgba(114, 215, 170, 0.381);
         }
         
         .newsletter-form button {
@@ -649,7 +669,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            box-shadow: 0 0 10px rgba(0, 217, 184, 0.4);
+            box-shadow: 0 0 10px rgba(115, 216, 170, 0.607);
             cursor: pointer;
             z-index: 1001;
             animation: pulse 2s infinite;
@@ -667,13 +687,13 @@
         
         @keyframes pulse {
             0% {
-                box-shadow: 0 0 0 0 rgba(0, 217, 184, 0.4);
+                box-shadow: 0 0 0 0 rgba(139, 194, 169, 0.4);
             }
             70% {
-                box-shadow: 0 0 0 15px rgba(0, 217, 184, 0.274);
+                box-shadow: 0 0 0 15px rgba(139, 194, 169, 0.274);
             }
             100% {
-                box-shadow: 0 0 0 0 rgba(0, 217, 184, 0.193);
+                box-shadow: 0 0 0 0 rgba(139, 194, 169, 0.193);
             }
         }
         
@@ -817,8 +837,9 @@
             animation: pulse 1.5s infinite;
         }
         
-        .preloader-logo img {
-            width: 80px;
+        .preloader-logo .leaf-animation {
+            font-size: 50px;
+            animation: rotate 3s linear infinite;
         }
         
         .preloader-text {
@@ -826,6 +847,11 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             opacity: 0.8;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         /* Scroll to top button */
@@ -859,27 +885,13 @@
         }
         
         /* Premium Elements */
-        .gold-accent {
-            color: #e2884c;
+        .accent-color {
+            color: var(--accent);
         }
         
         .textured-bg {
             position: relative;
             overflow: hidden;
-        }
-        
-        .textured-bg::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="%2300d9b8" stroke-width="0.5" stroke-opacity="0.05" /></svg>');
-            background-repeat: repeat;
-            opacity: 0.1;
-            pointer-events: none;
-            z-index: -1;
         }
         
         .elevated-card {
@@ -895,6 +907,23 @@
         .serif-heading {
             font-family: 'Playfair Display', serif;
             letter-spacing: 0.5px;
+        }
+        
+        /* Floating animation */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
         }
         
         /* Responsive Design */
@@ -951,7 +980,8 @@
             }
             
             .logo {
-                height: 50px;
+                height: auto;
+                font-size: 22px;
             }
             
             .theme-toggle {
@@ -1013,9 +1043,8 @@
     
     <!-- Sticky Glassmorphic Navbar -->
     <nav class="navbar">
-        <a href="#" class="logo">
-            <img src="images/logo.png" alt="Jingucha Logo" class="logo">
-        </a>
+        <img src="images/logo.png" class="logo">
+        </img>
         <div class="nav-right">
             <button id="aboutBtn">About</button>
             <button class="theme-toggle" id="themeToggle">
@@ -1028,7 +1057,7 @@
     <section class="hero textured-bg">
         <!-- Hero content -->
         <div class="hero-content" id="heroContent">
-            <h1 class="hero-text">Awaken Your <span class="gold-accent">Senses</span></h1>
+            <h1 class="hero-text">Awaken Your <span class="accent-color">Senses</span></h1>
             <div class="divider"></div>
             <p class="hero-subtext">Our Essence, Redefined</p>
             <button class="hero-btn" id="revealBtn">Reveal Nature's Legacy</button>
@@ -1036,7 +1065,7 @@
     </section>
     
     <!-- Product Section -->
-    <section class="product textured-bg">
+    <section class="product textured-bg" id="productSection">
         <div class="product-container">
             <!-- Product content -->
             <div class="product-content elevated-card" id="productContent">
@@ -1050,7 +1079,7 @@
             
             <!-- Product image -->
             <div class="product-image-container">
-                <img src="images/mockup.webp" alt="Plantivinia Product" class="product-image elevated-card">
+                <img src="images/mockup.webp" alt="Plantivinia Product" class="product-image elevated-card floating">
             </div>
         </div>
     </section>
@@ -1059,7 +1088,7 @@
     <section class="story textured-bg">
         <div class="story-container">
             <div class="story-content">
-                <h2 class="story-title">Our <span class="gold-accent">Story</span></h2>
+                <h2 class="story-title">Our <span class="accent-color">Story</span></h2>
                 <p class="story-text">Jingucha was born from a deep reverence for nature's wisdom. Founded in 2020 by environmental scientist Elena Rodriguez, our journey began with a simple question: How can we harness nature's gifts while preserving its delicate balance?</p>
                 <p class="story-text">Today, we stand as a testament to sustainable luxury, crafting products that honor the Earth and elevate your wellbeing. Every ingredient tells a story of ethical sourcing, artisanal craftsmanship, and ecological harmony.</p>
                 
@@ -1079,15 +1108,15 @@
                 </div>
             </div>
             
-            <div class="story-image elevated-card">
-                <img src="mockup-back.png" alt="Jingucha Founders">
+            <div class="story-image elevated-card" id="founderImage">
+                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Jingucha Founders" class="floating">
             </div>
         </div>
     </section>
     
     <!-- CTA Section -->
     <section class="cta textured-bg" id="cta">
-        <h2>Rhythm Of <span class="gold-accent">Nature</span></h2>
+        <h2>Rhythm Of <span class="accent-color">Nature</span></h2>
         <p>Jingucha is a celebration of nature’s quiet brilliance — a brand where sustainability is not just a promise, but a philosophy. Rooted in purity, we craft timeless products that honour the Earth while elevating your lifestyle.</p>
         <button class="cta-btn">Join Our Journey</button>
     </section>
@@ -1260,16 +1289,16 @@
                 ease: "power2.out"
             });
             
-            // CTA reveal
-            gsap.to("#cta", {
+            // Founder image animation
+            gsap.to("#founderImage", {
                 scrollTrigger: {
-                    trigger: ".cta",
-                    start: "top 80%",
+                    trigger: ".story",
+                    start: "top 85%",
                     toggleActions: "play none none none"
                 },
                 opacity: 1,
                 y: 0,
-                duration: 1,
+                duration: 1.2,
                 ease: "power2.out"
             });
             
@@ -1298,7 +1327,7 @@
             document.getElementById('revealBtn').addEventListener('click', () => {
                 gsap.to(window, {
                     duration: 1.8,
-                    scrollTo: ".product",
+                    scrollTo: "#productSection",
                     ease: "power2.inOut"
                 });
             });
@@ -1379,7 +1408,7 @@
             // Set initial states
             gsap.set("#productContent", { opacity: 0, y: 30 });
             gsap.set(".product-image", { opacity: 0, y: 30 });
-            gsap.set("#cta", { opacity: 0, y: 30 });
+            gsap.set("#founderImage", { opacity: 0, y: 50 });
         });
     </script>
 </body>

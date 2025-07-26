@@ -1,84 +1,1386 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Jingucha® | From Shell to Soil</title>
-  
-  <!-- Fonts and Styles -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jingucha® | Rhythm of Nature</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            /* Light Theme */
+            --light-bg: #fdfdfd;
+            --light-text: #181818;
+            --light-accent: #00d9b8;
+            --light-secondary: #f5f0e1;
+            --light-nav-bg: rgba(253, 253, 253, 0.85);
+            --light-glass: rgba(255, 255, 255, 0.2);
+            
+            /* Dark Theme */
+            --dark-bg: #0f0f0f;
+            --dark-text: #f5f5f5;
+            --dark-accent: #00d9b8;
+            --dark-secondary: #1a1a1a;
+            --dark-nav-bg: rgba(15, 15, 15, 0.85);
+            --dark-glass: rgba(0, 0, 0, 0.2);
+            
+            /* Current Theme - Defaults to Light */
+            --bg: var(--light-bg);
+            --text: var(--light-text);
+            --accent: var(--light-accent);
+            --secondary: var(--light-secondary);
+            --nav-bg: var(--light-nav-bg);
+            --glass: var(--light-glass);
+            
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.1);
+            --shadow-accent: 0 0 25px rgba(0, 217, 184, 0.3);
+        }
+        
+        .dark-theme {
+            --bg: var(--dark-bg);
+            --text: var(--dark-text);
+            --accent: var(--dark-accent);
+            --secondary: var(--dark-secondary);
+            --nav-bg: var(--dark-nav-bg);
+            --glass: var(--dark-glass);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: var(--transition);
+            overflow-x: hidden;
+            line-height: 1.6;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Glassmorphic Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: var(--nav-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid var(--glass);
+        }
+        
+        .navbar.scrolled {
+            padding: 1rem 5%;
+        }
+        
+        .logo {
+            height: 60px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        #aboutBtn {
+            border: 1px solid var(--accent);
+            background: transparent;
+            color: var(--accent);
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: var(--transition);
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+        }
+        
+        #aboutBtn:hover {
+            background: var(--accent);
+            color: var(--bg);
+        }
+        
+        .theme-toggle {
+            background: var(--glass);
+            border: 1px solid var(--glass);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        
+        .theme-toggle:hover {
+            transform: rotate(15deg);
+            background: var(--accent);
+            color: var(--bg);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 0 5%;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--bg) 100%);
+        }
+        
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            max-width: 900px;
+            position: relative;
+        }
+        
+        .hero-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            line-height: 1.1;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-subtext {
+            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-btn {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--accent);
+            padding: 1.2rem 3rem;
+            font-size: 1.1rem;
+            font-family: 'DM Sans', sans-serif;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            z-index: 10;
+            letter-spacing: 2px;
+            font-weight: 400;
+            text-transform: uppercase;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        
+        .hero-btn:hover {
+            background: var(--accent);
+            color: var(--bg);
+            box-shadow: var(--shadow-accent);
+            transform: translateY(-5px);
+            letter-spacing: 3px;
+        }
+        
+        /* Product Section */
+        .product {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 5rem 5%;
+            background: var(--secondary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5%;
+        }
+        
+        .product-content {
+            flex: 1;
+            text-align: left;
+            max-width: 600px;
+            z-index: 10;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 4rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--glass);
+            position: relative;
+            transform: translateY(0);
+            will-change: transform;
+        }
+        
+        .product-image-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .product-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.3));
+            transform: translateY(0);
+            border-radius: 12px;
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        
+        .product-image:hover {
+            transform: scale(1.03);
+        }
+        
+        .product-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 4vw, 3.8rem);
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+        
+        .product-subtitle {
+            font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+            font-weight: 300;
+            margin-bottom: 2rem;
+            color: var(--accent);
+            font-style: italic;
+        }
+        
+        .product-desc {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+        
+        .product-btn {
+            background: var(--accent);
+            color: var(--bg);
+            border: none;
+            padding: 1.2rem 3.5rem;
+            font-size: 1.1rem;
+            font-family: 'DM Sans', sans-serif;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .product-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-accent);
+            letter-spacing: 3px;
+        }
+        
+        /* Brand Story Section */
+        .story {
+            padding: 8rem 5%;
+            background: var(--bg);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .story-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4rem;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .story-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .story-image {
+            flex: 1;
+            min-width: 300px;
+            height: 500px;
+            background: linear-gradient(45deg, var(--accent), var(--secondary));
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+        
+        .story-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        
+        .story-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .story-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .story-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .story-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .story-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .stat-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 8rem 2rem;
+            text-align: center;
+            background: var(--bg);
+            position: relative;
+            z-index: 5;
+            overflow: hidden;
+        }
+        
+        .cta h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--accent), var(--text));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        
+        .cta p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+            color: var(--text);
+            opacity: 0.8;
+            line-height: 1.7;
+        }
+        
+        .cta-btn {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--accent);
+            padding: 1.2rem 3.5rem;
+            font-size: 1.1rem;
+            font-family: 'DM Sans', sans-serif;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .cta-btn:hover {
+            background: var(--accent);
+            color: var(--bg);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-accent);
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 5rem 5% 3rem;
+            text-align: center;
+            position: relative;
+            background: var(--bg);
+            border-top: 1px solid var(--glass);
+            overflow: hidden;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: left;
+        }
+        
+        .footer-col h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h4:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-col ul li a {
+            color: var(--text);
+            text-decoration: none;
+            transition: var(--transition);
+            opacity: 0.8;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--glass);
+            border-radius: 50%;
+            color: var(--text);
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            color: var(--bg);
+            transform: translateY(-5px);
+        }
+        
+        .footer-bottom {
+            margin-top: 5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass);
+        }
+        
+        .footer-slogan {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            letter-spacing: 3px;
+            color: var(--text);
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-copyright {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* Newsletter Form */
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.9rem 1.5rem;
+            background: var(--glass);
+            border: 1px solid var(--glass);
+            border-radius: 50px;
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(0, 217, 184, 0.2);
+        }
+        
+        .newsletter-form button {
+            background: var(--accent);
+            color: var(--bg);
+            border: none;
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+        
+        .newsletter-form button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-accent);
+        }
+        
+        /* Luxury divider */
+        .divider {
+            width: 80px;
+            height: 2px;
+            background: var(--accent);
+            margin: 3rem auto;
+            position: relative;
+        }
+        
+        .divider:after, .divider:before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            top: -3px;
+        }
+        
+        .divider:after {
+            right: 0;
+        }
+        
+        .divider:before {
+            left: 0;
+        }
+        
+        /* CHAT BUTTON */
+        #chatBtn {
+            position: fixed;
+            bottom: 50px;
+            right: 30px;
+            background-color: var(--accent);
+            color: var(--bg);
+            border: none;
+            border-radius: 50px;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 0 10px rgba(0, 217, 184, 0.4);
+            cursor: pointer;
+            z-index: 1001;
+            animation: pulse 2s infinite;
+            transition: transform 0.3s ease;
+            font-family: 'DM Sans', sans-serif;
+        }
+        
+        #chatBtn:hover {
+            transform: scale(1.05);
+        }
+        
+        #chatBtn .icon {
+            font-size: 1.2rem;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 217, 184, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(0, 217, 184, 0.274);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 217, 184, 0.193);
+            }
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: var(--secondary);
+            padding: 2.5rem;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            color: var(--text);
+            position: relative;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--glass);
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+        
+        .modal-content.active {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .modal-content h2 {
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+        }
+        
+        .modal-content p {
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+        
+        .modal-content input,
+        .modal-content textarea {
+            width: 100%;
+            padding: 0.9rem;
+            margin-bottom: 1.2rem;
+            background-color: var(--glass);
+            border: 1px solid var(--glass);
+            border-radius: 8px;
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .modal-content textarea {
+            min-height: 120px;
+        }
+        
+        .modal-content button {
+            background-color: var(--accent);
+            border: none;
+            padding: 0.9rem 1.8rem;
+            border-radius: 50px;
+            color: var(--bg);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+        
+        .modal-content button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-accent);
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.8rem;
+            color: var(--accent);
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .close-btn:hover {
+            background: var(--glass);
+        }
+        
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .preloader-logo {
+            width: 120px;
+            height: 120px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            animation: pulse 1.5s infinite;
+        }
+        
+        .preloader-logo img {
+            width: 80px;
+        }
+        
+        .preloader-text {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+        
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            color: var(--bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .scroll-top:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Premium Elements */
+        .gold-accent {
+            color: #e2884c;
+        }
+        
+        .textured-bg {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .textured-bg::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="%2300d9b8" stroke-width="0.5" stroke-opacity="0.05" /></svg>');
+            background-repeat: repeat;
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .elevated-card {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .elevated-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .serif-heading {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .product-container {
+                flex-direction: column;
+                gap: 3rem;
+            }
+            
+            .story-container {
+                flex-direction: column;
+            }
+            
+            .hero-content {
+                margin-top: 4rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1.2rem 5%;
+            }
+            
+            .hero {
+                padding-top: 6rem;
+            }
+            
+            .hero-text {
+                font-size: 2.5rem;
+            }
+            
+            .hero-btn, .product-btn {
+                padding: 1rem 2.5rem;
+                font-size: 1rem;
+            }
+            
+            .product-content {
+                padding: 3rem 2rem;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .story-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .navbar {
+                padding: 1rem 5%;
+            }
+            
+            .logo {
+                height: 50px;
+            }
+            
+            .theme-toggle {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .hero-text {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtext {
+                font-size: 1.2rem;
+            }
+            
+            .product-title {
+                font-size: 2rem;
+            }
+            
+            .product-subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .product-desc {
+                font-size: 1rem;
+            }
+            
+            .footer-slogan {
+                font-size: 1.8rem;
+            }
+            
+            #chatBtn {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.9rem;
+                bottom: 30px;
+                right: 20px;
+            }
+            
+            .modal-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-
-  <!-- Custom Cursor -->
-  <img id="customCursor" src="images/custom-cursor.png" alt="cursor" />
-
-  <!-- Leaf Container -->
-  <div id="leaf-container"></div>
-
-  <!-- Navbar -->
-  <nav>
-    <a href="about.html">
-      <img src="images/logo.png" alt="Jingucha Logo" class="logo" />
-    </a>
-    <button id="aboutBtn">About</button>
-  </nav>
-
-  <!-- Hero Section -->
-  <section class="greeting">
-    <div class="greeting-text" id="greetingText">
-      <h1>Immerse Yourself In The Refined Rhythm Of Nature's Harmony</h1>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-logo">
+            <div class="leaf-animation">🍃</div>
+        </div>
+        <div class="preloader-text">Rhythm of Nature</div>
     </div>
-
-    <div class="product-container" id="productContainer">
-      <img src="images/mockup.webp" alt="Plantivinia" class="product-hero" />
-      <a href="product.html" class="explore-btn near-product">Explore Products</a>
+    
+    <!-- Scroll to top button -->
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
     </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="cta" id="cta">
-    <h2>Rhythm Of Nature</h2>
-    <p>Jingucha is a celebration of nature’s quiet brilliance — a brand where sustainability is not just a promise, but a philosophy. Rooted in purity, we craft timeless products that honour the Earth while elevating your lifestyle.</p>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p class="slogan">Crafted with care. Powered by nature.</p>
-  </footer>
-
-  <!-- Scripts -->
-  <script src="js/main.js"></script>
-  
-  <!-- Modals -->
-  <div id="aboutModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" id="closeAboutModal">&times;</span>
-      <h2>About Jingucha</h2>
-      <p>Jingucha is a celebration of nature's quiet brilliance. Our philosophy is rooted in purity and sustainability, crafting products that honor the Earth while elevating your lifestyle.</p>
-      <p>Founded in 2020, we've been committed to ethical sourcing and environmentally friendly practices. Each product is carefully designed to bring you closer to nature's harmony.</p>
+    
+    <!-- Sticky Glassmorphic Navbar -->
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <img src="images/logo.png" alt="Jingucha Logo" class="logo">
+        </a>
+        <div class="nav-right">
+            <button id="aboutBtn">About</button>
+            <button class="theme-toggle" id="themeToggle">
+                <span id="themeIcon">☀️</span>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero textured-bg">
+        <!-- Hero content -->
+        <div class="hero-content" id="heroContent">
+            <h1 class="hero-text">Awaken Your <span class="gold-accent">Senses</span></h1>
+            <div class="divider"></div>
+            <p class="hero-subtext">Our Essence, Redefined</p>
+            <button class="hero-btn" id="revealBtn">Reveal Nature's Legacy</button>
+        </div>
+    </section>
+    
+    <!-- Product Section -->
+    <section class="product textured-bg">
+        <div class="product-container">
+            <!-- Product content -->
+            <div class="product-content elevated-card" id="productContent">
+                <h2 class="product-title">Plantivinia</h2>
+                <p class="product-subtitle">"More Than Just Calcium"</p>
+                <div class="divider"></div>
+                <p class="product-desc">A premium plant-based calcium powder crafted sustainably from eggshells, enhanced with nature's finest botanicals for holistic nourishment. Our unique formula combines science and nature to deliver unparalleled wellness benefits.</p>
+                <p class="product-desc">Each batch is carefully formulated to deliver the perfect balance of minerals and nutrients, supporting bone health, muscle function, and overall vitality.</p>
+                <button class="product-btn">Own the Ritual</button>
+            </div>
+            
+            <!-- Product image -->
+            <div class="product-image-container">
+                <img src="images/mockup.webp" alt="Plantivinia Product" class="product-image elevated-card">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Brand Story Section -->
+    <section class="story textured-bg">
+        <div class="story-container">
+            <div class="story-content">
+                <h2 class="story-title">Our <span class="gold-accent">Story</span></h2>
+                <p class="story-text">Jingucha was born from a deep reverence for nature's wisdom. Founded in 2020 by environmental scientist Elena Rodriguez, our journey began with a simple question: How can we harness nature's gifts while preserving its delicate balance?</p>
+                <p class="story-text">Today, we stand as a testament to sustainable luxury, crafting products that honor the Earth and elevate your wellbeing. Every ingredient tells a story of ethical sourcing, artisanal craftsmanship, and ecological harmony.</p>
+                
+                <div class="story-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="statYears">5+</div>
+                        <div class="stat-label">Years of Excellence</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="statProducts">12</div>
+                        <div class="stat-label">Eco Products</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="statTrees">5K+</div>
+                        <div class="stat-label">Trees Planted</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="story-image elevated-card">
+                <img src="mockup-back.png" alt="Jingucha Founders">
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta textured-bg" id="cta">
+        <h2>Rhythm Of <span class="gold-accent">Nature</span></h2>
+        <p>Jingucha is a celebration of nature’s quiet brilliance — a brand where sustainability is not just a promise, but a philosophy. Rooted in purity, we craft timeless products that honour the Earth while elevating your lifestyle.</p>
+        <button class="cta-btn">Join Our Journey</button>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer textured-bg">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>Jingucha</h4>
+                <p>Crafting sustainable wellness products that honor nature's rhythm and elevate your wellbeing.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="#">Our Products</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Store Locator</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Newsletter</h4>
+                <p>Subscribe for exclusive updates and wellness insights.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p class="footer-slogan">Crafted with care. Powered by nature.</p>
+            <p class="footer-copyright">© 2023 Jingucha®. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Let's Chat button -->
+    <button id="chatBtn">
+        <span class="icon">💬</span>
+        Let's Chat
+    </button>
+    
+    <!-- Modals -->
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeAboutModal">&times;</span>
+            <h2>About Jingucha</h2>
+            <p>Jingucha is a celebration of nature's quiet brilliance. Our philosophy is rooted in purity and sustainability, crafting products that honor the Earth while elevating your lifestyle.</p>
+            <p>Founded in 2020, we've been committed to ethical sourcing and environmentally friendly practices. Each product is carefully designed to bring you closer to nature's harmony.</p>
+            <p>Our mission is to create wellness experiences that nourish both people and planet. We believe that true luxury is found in simplicity, integrity, and respect for natural rhythms.</p>
+            <div class="divider" style="margin: 1.5rem auto;"></div>
+            <h3>Our Values</h3>
+            <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                <li style="margin-bottom: 0.8rem;">Sustainability as a practice, not a promise</li>
+                <li style="margin-bottom: 0.8rem;">Radical transparency in sourcing and production</li>
+                <li style="margin-bottom: 0.8rem;">Respect for indigenous knowledge and traditions</li>
+                <li style="margin-bottom: 0.8rem;">Innovation through biomimicry and natural wisdom</li>
+            </ul>
+        </div>
     </div>
-  </div>
-
-  <div id="contactModal" class="modal">
-    <div class="modal-content">
-      <span id="closeModal" class="close-btn">&times;</span>
-      <h2>Contact Us</h2>
-      <form>
-        <input type="text" placeholder="Your Name" required>
-        <input type="email" placeholder="Your Email" required>
-        <textarea placeholder="Your Message" required></textarea>
-        <button type="submit">Send Message</button>
-      </form>
+    
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close-btn">&times;</span>
+            <h2>Contact Us</h2>
+            <form>
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
     </div>
-  </div>
-
-  <!-- Let's Chat button -->
-  <button id="chatBtn">
-    <span class="icon">💬</span>
-    Let's Chat
-  </button>
-
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Preloader
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.classList.add('hidden');
+            }, 2000);
+            
+            // Theme Toggle
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            let isDarkMode = false;
+            
+            themeToggle.addEventListener('click', () => {
+                isDarkMode = !isDarkMode;
+                document.body.classList.toggle('dark-theme');
+                themeIcon.textContent = isDarkMode ? '🌙' : '☀️';
+                
+                // Animate theme transition
+                gsap.fromTo('body', 
+                    { opacity: 0.9 }, 
+                    { opacity: 1, duration: 0.8, ease: "power2.out" }
+                );
+            });
+            
+            // Navbar shrink on scroll
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            
+            // Initialize GSAP
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Hero content fade out
+            gsap.to("#heroContent", {
+                scrollTrigger: {
+                    trigger: ".hero",
+                    start: "center center",
+                    end: "bottom top",
+                    scrub: 1
+                },
+                opacity: 0,
+                y: -80,
+                ease: "power2.inOut"
+            });
+            
+            // Product section animations
+            gsap.to("#productContent", {
+                scrollTrigger: {
+                    trigger: ".product",
+                    start: "top 80%",
+                    end: "bottom top",
+                    toggleActions: "play none none none"
+                },
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "power2.out"
+            });
+            
+            gsap.to(".product-image", {
+                scrollTrigger: {
+                    trigger: ".product",
+                    start: "top 60%",
+                    end: "bottom top",
+                    toggleActions: "play none none none"
+                },
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "power2.out"
+            });
+            
+            // CTA reveal
+            gsap.to("#cta", {
+                scrollTrigger: {
+                    trigger: ".cta",
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                },
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out"
+            });
+            
+            // Story stats animation
+            gsap.utils.toArray('.stat-number').forEach(stat => {
+                const targetValue = parseInt(stat.textContent);
+                stat.textContent = "0";
+                
+                ScrollTrigger.create({
+                    trigger: stat,
+                    start: "top 90%",
+                    onEnter: () => {
+                        gsap.to(stat, {
+                            textContent: targetValue,
+                            duration: 2,
+                            ease: "power2.out",
+                            snap: { textContent: 1 },
+                            stagger: 1
+                        });
+                    },
+                    once: true
+                });
+            });
+            
+            // Reveal button scroll to product
+            document.getElementById('revealBtn').addEventListener('click', () => {
+                gsap.to(window, {
+                    duration: 1.8,
+                    scrollTo: ".product",
+                    ease: "power2.inOut"
+                });
+            });
+            
+            // Modal handling
+            const aboutBtn = document.getElementById('aboutBtn');
+            const chatBtn = document.getElementById('chatBtn');
+            const contactModal = document.getElementById('contactModal');
+            const aboutModal = document.getElementById('aboutModal');
+            const closeModal = document.getElementById('closeModal');
+            const closeAboutModal = document.getElementById('closeAboutModal');
+            
+            // About button opens modal
+            aboutBtn.addEventListener('click', () => {
+                aboutModal.style.display = 'flex';
+                setTimeout(() => {
+                    document.querySelector('#aboutModal .modal-content').classList.add('active');
+                }, 10);
+            });
+            
+            // Chat button opens contact modal
+            chatBtn.addEventListener('click', () => {
+                contactModal.style.display = 'flex';
+                setTimeout(() => {
+                    document.querySelector('#contactModal .modal-content').classList.add('active');
+                }, 10);
+            });
+            
+            // Close modals
+            closeModal.addEventListener('click', () => {
+                document.querySelector('#contactModal .modal-content').classList.remove('active');
+                setTimeout(() => {
+                    contactModal.style.display = 'none';
+                }, 300);
+            });
+            
+            closeAboutModal.addEventListener('click', () => {
+                document.querySelector('#aboutModal .modal-content').classList.remove('active');
+                setTimeout(() => {
+                    aboutModal.style.display = 'none';
+                }, 300);
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === contactModal) {
+                    document.querySelector('#contactModal .modal-content').classList.remove('active');
+                    setTimeout(() => {
+                        contactModal.style.display = 'none';
+                    }, 300);
+                }
+                if (e.target === aboutModal) {
+                    document.querySelector('#aboutModal .modal-content').classList.remove('active');
+                    setTimeout(() => {
+                        aboutModal.style.display = 'none';
+                    }, 300);
+                }
+            });
+            
+            // Scroll to top button
+            const scrollTopBtn = document.getElementById('scrollTop');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 500) {
+                    scrollTopBtn.classList.add('visible');
+                } else {
+                    scrollTopBtn.classList.remove('visible');
+                }
+            });
+            
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Set initial states
+            gsap.set("#productContent", { opacity: 0, y: 30 });
+            gsap.set(".product-image", { opacity: 0, y: 30 });
+            gsap.set("#cta", { opacity: 0, y: 30 });
+        });
+    </script>
 </body>
 </html>

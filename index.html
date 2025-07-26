@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jingucha® | Rhythm of Nature</title>
+    <title>Jingucha®️ | Rhythm of Nature</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
@@ -98,6 +98,7 @@
         .logo {
             height: 50px;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
         
         .nav-right {
@@ -275,13 +276,13 @@
         
         .product-image {
             width: 100%;
-            width: 600px; /* Increased size */
+            width: 600px;
             height: 450px;
             filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.3));
             transform: translateY(0);
             border-radius: 12px;
             transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-            animation: float 6s ease-in-out infinite; /* Added floating animation */
+            animation: float 6s ease-in-out infinite;
         }
         
         .product-image:hover {
@@ -510,6 +511,7 @@
             border-radius: 50%;
             color: var(--text);
             transition: var(--transition);
+            text-decoration: none; /* Remove underline from social links */
         }
         
         .social-links a:hover {
@@ -543,6 +545,7 @@
             display: flex;
             gap: 1rem;
             margin-top: 1.5rem;
+            justify-content: center; /* Center the form */
         }
         
         .newsletter-form input {
@@ -555,6 +558,7 @@
             font-family: 'DM Sans', sans-serif;
             font-size: 1rem;
             transition: var(--transition);
+            max-width: 300px; /* Limit input width */
         }
         
         .newsletter-form input:focus {
@@ -613,7 +617,7 @@
         /* CHAT BUTTON */
         #chatBtn {
             position: fixed;
-            bottom: 50px;
+            bottom: 30px;
             right: 30px;
             background-color: var(--accent);
             color: var(--bg);
@@ -641,6 +645,36 @@
         
         #chatBtn .icon {
             font-size: 1.2rem;
+        }
+        
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            color: var(--bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .scroll-top:hover {
+            transform: translateY(-5px);
         }
         
         @keyframes pulse {
@@ -822,36 +856,6 @@
             100% {
                 transform: translateY(0px);
             }
-        }
-        
-        /* Scroll to top button */
-        .scroll-top {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: var(--accent);
-            color: var(--bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 1000;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.4s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .scroll-top.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .scroll-top:hover {
-            transform: translateY(-5px);
         }
         
         /* Premium Elements */
@@ -1132,7 +1136,7 @@
         
         <div class="footer-bottom">
             <p class="footer-slogan">Crafted with care. Powered by nature.</p>
-            <p class="footer-copyright">© 2023 Jingucha®. All rights reserved.</p>
+            <p class="footer-copyright">©️ 2023 Jingucha®️. All rights reserved.</p>
         </div>
     </footer>
     
@@ -1154,7 +1158,7 @@
             <h3>Our Values</h3>
             <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                 <li style="margin-bottom: 0.8rem;">Sustainability as a practice, not a promise</li>
-                <li style="margin-bottom: 0.8rem;">Radical transparency in sourcing and production</li>
+                <li style="margin-bottom: 0.8rm;">Radical transparency in sourcing and production</li>
                 <li style="margin-bottom: 0.8rem;">Respect for indigenous knowledge and traditions</li>
                 <li style="margin-bottom: 0.8rem;">Innovation through biomimicry and natural wisdom</li>
             </ul>
@@ -1207,6 +1211,12 @@
                 } else {
                     navbar.classList.remove('scrolled');
                 }
+            });
+            
+            // Logo reload page
+            const logo = document.querySelector('.logo');
+            logo.addEventListener('click', () => {
+                window.location.reload();
             });
             
             // Initialize GSAP plugins
@@ -1268,7 +1278,7 @@
             
             // Story stats animation
             gsap.utils.toArray('.stat-number').forEach(stat => {
-                const targetValue = parseInt(stat.textContent);
+                const targetValue = parseInt(stat.textContent.replace(/[^0-9]/g, '')) || 0;
                 stat.textContent = "0";
                 
                 ScrollTrigger.create({
@@ -1280,26 +1290,24 @@
                             duration: 2,
                             ease: "power2.out",
                             snap: { textContent: 1 },
-                            stagger: 1
+                            stagger: 1,
+                            onUpdate: function() {
+                                stat.textContent = Math.ceil(this.targets()[0].textContent) + (stat.id === 'statYears' || stat.id === 'statTrees' ? '+' : '');
+                            }
                         });
                     },
                     once: true
                 });
             });
             
-            // Reveal button scroll to product - Fixed functionality
+            // Reveal button scroll to product
             document.getElementById('revealBtn').addEventListener('click', function() {
-                // Add click animation
                 this.classList.add('btn-clicked');
-                
-                // Scroll to product section
                 gsap.to(window, {
                     duration: 1.8,
                     scrollTo: "#productSection",
                     ease: "power2.inOut"
                 });
-                
-                // Reset button after 2 seconds
                 setTimeout(() => {
                     this.classList.remove('btn-clicked');
                 }, 2000);
@@ -1321,35 +1329,28 @@
             const closeModal = document.getElementById('closeModal');
             const closeAboutModal = document.getElementById('closeAboutModal');
             
-            // About button opens modal
             aboutBtn.addEventListener('click', function() {
                 aboutModal.style.display = 'flex';
                 setTimeout(() => {
                     document.querySelector('#aboutModal .modal-content').classList.add('active');
                 }, 10);
-                
-                // Reset button after 2 seconds
                 this.classList.add('btn-clicked');
                 setTimeout(() => {
                     this.classList.remove('btn-clicked');
                 }, 2000);
             });
             
-            // Chat button opens contact modal
             chatBtn.addEventListener('click', function() {
                 contactModal.style.display = 'flex';
                 setTimeout(() => {
                     document.querySelector('#contactModal .modal-content').classList.add('active');
                 }, 10);
-                
-                // Reset button after 2 seconds
                 this.classList.add('btn-clicked');
                 setTimeout(() => {
                     this.classList.remove('btn-clicked');
                 }, 2000);
             });
             
-            // Close modals
             closeModal.addEventListener('click', () => {
                 document.querySelector('#contactModal .modal-content').classList.remove('active');
                 setTimeout(() => {
@@ -1364,7 +1365,6 @@
                 }, 300);
             });
             
-            // Close modal when clicking outside
             window.addEventListener('click', (e) => {
                 if (e.target === contactModal) {
                     document.querySelector('#contactModal .modal-content').classList.remove('active');

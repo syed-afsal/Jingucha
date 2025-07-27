@@ -11,40 +11,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollToPlugin.min.js"></script>
     <style>
         :root {
+            /* Dark Theme as Default */
+            --dark-bg: #121212;
+            --dark-text: #f0f0f0;
+            --dark-accent: #3fe399;
+            --dark-secondary: #1e1e1e;
+            --dark-nav-bg: rgba(18, 18, 18, 0.85);
+            --dark-glass: rgba(0, 0, 0, 0.12);
+            --dark-beige: #2a241c;
+            
             /* Light Theme */
             --light-bg: #fcfaf7;
             --light-text: #1a1a1a;
             --light-accent: #3fe399;
             --light-secondary: #f5f0e1;
-            --light-nav-bg: rgba(252, 250, 247, 0.5);
+            --light-nav-bg: rgba(252, 250, 247, 0.85);
             --light-glass: rgba(255, 255, 255, 0.12);
             --light-beige: #f0e6d8;
             
-            /* Dark Theme */
-            --dark-bg: #121212;
-            --dark-text: #f0f0f0;
-            --dark-accent: #3fe399;
-            --dark-secondary: #1e1e1e;
-            --dark-nav-bg: rgba(18, 18, 18, 0.5);
-            --dark-glass: rgba(0, 0, 0, 0.12);
-            --dark-beige: #2a241c;
-            
-            /* Current Theme - Defaults to Light */
-            --bg: var(--light-bg);
-            --text: var(--light-text);
-            --accent: var(--light-accent);
-            --secondary: var(--light-secondary);
-            --nav-bg: var(--light-nav-bg);
-            --glass: var(--light-glass);
-            --beige: var(--light-beige);
-            
-            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.05);
-            --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.1);
-            --shadow-accent: 0 0 25px rgba(121, 210, 170, 0.862);
-        }
-        
-        .dark-theme {
+            /* Current Theme - Defaults to Dark */
             --bg: var(--dark-bg);
             --text: var(--dark-text);
             --accent: var(--dark-accent);
@@ -52,6 +37,21 @@
             --nav-bg: var(--dark-nav-bg);
             --glass: var(--dark-glass);
             --beige: var(--dark-beige);
+            
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.1);
+            --shadow-accent: 0 0 25px rgba(121, 210, 170, 0.862);
+        }
+        
+        .light-theme {
+            --bg: var(--light-bg);
+            --text: var(--light-text);
+            --accent: var(--light-accent);
+            --secondary: var(--light-secondary);
+            --nav-bg: var(--light-nav-bg);
+            --glass: var(--light-glass);
+            --beige: var(--light-beige);
         }
         
         * {
@@ -95,17 +95,24 @@
             padding: 1rem 5%;
         }
         
-        .logo {
+        .nav-logo {
             height: 40px;
             transition: all 0.3s ease;
             cursor: pointer;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .nav-logo.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .nav-right {
             display: flex;
             align-items: center;
             gap: 1rem;
+            margin-left: auto;
         }
         
         #aboutBtn {
@@ -164,8 +171,21 @@
             background: linear-gradient(135deg, var(--beige) 0%, var(--bg) 100%);
         }
         
-        .dark-theme .hero {
-            background: linear-gradient(135deg, #1a1a1a 0%, var(--dark-bg) 100%);
+        .light-theme .hero {
+            background: linear-gradient(135deg, #f0e6d8 0%, var(--light-bg) 100%);
+        }
+        
+        .hero-logo-container {
+            position: absolute;
+            top: 20%;
+            transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 10;
+        }
+        
+        .hero-logo {
+            height: 60px;
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+            transition: all 0.6s ease;
         }
         
         .hero-content {
@@ -173,6 +193,7 @@
             z-index: 10;
             max-width: 900px;
             position: relative;
+            margin-top: 100px;
         }
         
         .hero-text {
@@ -299,7 +320,7 @@
         
         .product-image {
             width: 100%;
-            width: 600px;
+            max-width: 600px;
             height: 450px;
             filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.3));
             transform: translateY(0);
@@ -563,7 +584,7 @@
             opacity: 0.7;
         }
         
-        /* Newsletter Form */
+        /* Newsletter Form with Outline */
         .newsletter-form {
             display: flex;
             flex-direction: column;
@@ -576,7 +597,7 @@
             width: 100%;
             padding: 0.9rem 1.5rem;
             background: transparent;
-            border: 1px solid var(--glass);
+            border: 1px solid var(--glass); /* Added outline */
             border-radius: 50px;
             color: var(--text);
             font-family: 'DM Sans', sans-serif;
@@ -896,7 +917,7 @@
             }
             
             .hero-content {
-                margin-top: 4rem;
+                margin-top: 100px;
             }
         }
         
@@ -905,12 +926,16 @@
                 padding: 1.2rem 5%;
             }
             
-            .logo {
+            .nav-logo {
                 height: 35px;
             }
             
             .hero {
                 padding-top: 4rem;
+            }
+            
+            .hero-logo {
+                height: 50px;
             }
             
             .hero-text {
@@ -954,7 +979,7 @@
                 padding: 1rem 5%;
             }
             
-            .logo {
+            .nav-logo {
                 height: 30px;
             }
             
@@ -1003,6 +1028,10 @@
             .story-image {
                 height: 350px;
             }
+            
+            .hero-logo-container {
+                top: 15%;
+            }
         }
         
         /* iOS specific adjustments */
@@ -1042,7 +1071,7 @@
     
     <!-- Sticky Glassmorphic Navbar -->
     <nav class="navbar">
-        <img src="https://cdn-icons-png.flaticon.com/512/1532/1532556.png" class="logo" alt="Jingucha Logo">
+        <img src="images/logo.png" class="nav-logo" alt="Jingucha Logo" id="navLogo">
         <div class="nav-right">
             <button id="aboutBtn">About</button>
             <button class="theme-toggle" id="themeToggle">
@@ -1053,6 +1082,11 @@
     
     <!-- Hero Section -->
     <section class="hero textured-bg">
+        <!-- Hero logo -->
+        <div class="hero-logo-container" id="heroLogoContainer">
+            <img src="images/logo.png" class="hero-logo" alt="Jingucha Logo" id="heroLogo">
+        </div>
+        
         <!-- Hero content -->
         <div class="hero-content" id="heroContent">
             <h1 class="hero-text">Awaken Your <span class="accent-color">Senses</span></h1>
@@ -1088,7 +1122,7 @@
             
             <!-- Product image -->
             <div class="product-image-container">
-                <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Plantivinia Product" class="product-image elevated-card">
+                <img src="images/mockup.webp" alt="Plantivinia Product" class="product-image elevated-card">
             </div>
         </div>
     </section>
@@ -1235,12 +1269,12 @@
             // Theme Toggle
             const themeToggle = document.getElementById('themeToggle');
             const themeIcon = document.getElementById('themeIcon');
-            let isDarkMode = false;
+            let isLightMode = false;
             
             themeToggle.addEventListener('click', () => {
-                isDarkMode = !isDarkMode;
-                document.body.classList.toggle('dark-theme');
-                themeIcon.textContent = isDarkMode ? '🌙' : '☀️';
+                isLightMode = !isLightMode;
+                document.body.classList.toggle('light-theme');
+                themeIcon.textContent = isLightMode ? '🌙' : '☀️';
                 
                 // Animate theme transition
                 gsap.fromTo('body', 
@@ -1249,20 +1283,76 @@
                 );
             });
             
+            // Logo elements
+            const heroLogoContainer = document.getElementById('heroLogoContainer');
+            const heroLogo = document.getElementById('heroLogo');
+            const navLogo = document.getElementById('navLogo');
+            
             // Navbar shrink on scroll
             const navbar = document.querySelector('.navbar');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
+            const revealBtn = document.getElementById('revealBtn');
+            
+            // Logo animation variables
+            let lastScrollTop = 0;
+            let logoMoved = false;
+            let scrollThreshold = 100;
+            
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                // Navbar shrink effect
+                if (scrollTop > 50) {
                     navbar.classList.add('scrolled');
                 } else {
                     navbar.classList.remove('scrolled');
                 }
-            });
-            
-            // Logo reload page
-            const logo = document.querySelector('.logo');
-            logo.addEventListener('click', () => {
-                window.location.reload();
+                
+                // Logo animation logic
+                if (scrollTop > scrollThreshold && !logoMoved) {
+                    // Move logo to navbar
+                    gsap.to(heroLogoContainer, {
+                        opacity: 0,
+                        y: -50,
+                        duration: 0.8,
+                        ease: "power2.out",
+                        onComplete: () => {
+                            heroLogoContainer.style.display = 'none';
+                        }
+                    });
+                    
+                    gsap.to(navLogo, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        delay: 0.2,
+                        ease: "power2.out"
+                    });
+                    
+                    navLogo.classList.add('visible');
+                    logoMoved = true;
+                }
+                else if (scrollTop <= scrollThreshold && logoMoved) {
+                    // Move logo back to hero
+                    heroLogoContainer.style.display = 'block';
+                    
+                    gsap.to(navLogo, {
+                        opacity: 0,
+                        y: 20,
+                        duration: 0.6,
+                        ease: "power2.out"
+                    });
+                    
+                    gsap.to(heroLogoContainer, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        ease: "power2.out"
+                    });
+                    
+                    logoMoved = false;
+                }
+                
+                lastScrollTop = scrollTop;
             });
             
             // Initialize GSAP plugins
@@ -1347,7 +1437,7 @@
             });
             
             // Reveal button scroll to product
-            document.getElementById('revealBtn').addEventListener('click', function() {
+            revealBtn.addEventListener('click', function() {
                 this.classList.add('btn-clicked');
                 gsap.to(window, {
                     duration: 1.8,
@@ -1448,6 +1538,7 @@
             gsap.set("#productContent", { opacity: 0, y: 30 });
             gsap.set(".product-image", { opacity: 0, y: 30 });
             gsap.set("#founderImage", { opacity: 0, y: 50 });
+            gsap.set(navLogo, { opacity: 0, y: 20 });
         });
     </script>
 </body>

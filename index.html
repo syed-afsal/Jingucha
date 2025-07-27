@@ -16,8 +16,8 @@
             --light-text: #1a1a1a;
             --light-accent: #3fe399;
             --light-secondary: #f5f0e1;
-            --light-nav-bg: rgba(252, 250, 247, 0.85);
-            --light-glass: rgba(255, 255, 255, 0.12); /* Reduced opacity */
+            --light-nav-bg: rgba(252, 250, 247, 0.5);
+            --light-glass: rgba(255, 255, 255, 0.12);
             --light-beige: #f0e6d8;
             
             /* Dark Theme */
@@ -25,8 +25,8 @@
             --dark-text: #f0f0f0;
             --dark-accent: #3fe399;
             --dark-secondary: #1e1e1e;
-            --dark-nav-bg: rgba(18, 18, 18, 0.85);
-            --dark-glass: rgba(0, 0, 0, 0.12); /* Reduced opacity */
+            --dark-nav-bg: rgba(18, 18, 18, 0.5);
+            --dark-glass: rgba(0, 0, 0, 0.12);
             --dark-beige: #2a241c;
             
             /* Current Theme - Defaults to Light */
@@ -84,7 +84,7 @@
             align-items: center;
             z-index: 1000;
             background: var(--nav-bg);
-            backdrop-filter: blur(12px); /* Increased blur */
+            backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             transition: var(--transition);
             box-shadow: var(--shadow-sm);
@@ -96,19 +96,16 @@
         }
         
         .logo {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            height: 40px; /* Reduced size */
+            height: 40px;
             transition: all 0.3s ease;
             cursor: pointer;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
         }
         
         .nav-right {
             display: flex;
             align-items: center;
             gap: 1rem;
-            margin-left: auto; /* Push to right */
         }
         
         #aboutBtn {
@@ -198,6 +195,28 @@
             margin-right: auto;
             color: var(--text);
             opacity: 0.9;
+        }
+        
+        /* New Divider Design */
+        .elegant-divider {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+        }
+        
+        .circle {
+            width: 8px;
+            height: 8px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+        }
+        
+        .divider-line {
+            height: 2px;
+            width: 80px;
+            background: var(--accent);
+            margin: 0 10px;
         }
         
         .btn {
@@ -515,7 +534,7 @@
             border-radius: 50%;
             color: var(--text);
             transition: var(--transition);
-            text-decoration: none; /* Remove underline from social links */
+            text-decoration: none;
         }
         
         .social-links a:hover {
@@ -547,22 +566,23 @@
         /* Newsletter Form */
         .newsletter-form {
             display: flex;
+            flex-direction: column;
             gap: 1rem;
             margin-top: 1.5rem;
-            justify-content: center; /* Center the form */
+            align-items: center;
         }
         
         .newsletter-form input {
-            flex: 1;
+            width: 100%;
             padding: 0.9rem 1.5rem;
             background: transparent;
-            border: 1px solid var(--glass); /* Added border */
+            border: 1px solid var(--glass);
             border-radius: 50px;
             color: var(--text);
             font-family: 'DM Sans', sans-serif;
             font-size: 1rem;
             transition: var(--transition);
-            max-width: 300px; /* Limit input width */
+            max-width: 100%;
         }
         
         .newsletter-form input:focus {
@@ -584,38 +604,13 @@
             font-size: 1rem;
             letter-spacing: 1px;
             white-space: nowrap;
+            width: 100%;
+            max-width: 300px;
         }
         
         .newsletter-form button:hover {
             transform: translateY(-3px);
             box-shadow: var(--shadow-accent);
-        }
-        
-        /* Luxury divider */
-        .divider {
-            width: 80px;
-            height: 2px;
-            background: var(--accent);
-            margin: 3rem auto;
-            position: relative;
-        }
-        
-        .divider:after, .divider:before {
-            content: '';
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border: 2px solid var(--accent);
-            border-radius: 50%;
-            top: -3px;
-        }
-        
-        .divider:after {
-            right: 0;
-        }
-        
-        .divider:before {
-            left: 0;
         }
         
         /* CHAT BUTTON */
@@ -711,12 +706,12 @@
         
         .modal-content {
             background-color: var(--secondary);
-            padding: 2rem; /* Reduced padding */
+            padding: 2.5rem;
             border-radius: 12px;
-            max-width: 90%; /* Better mobile fit */
-            width: 500px;
-            max-height: 85vh; /* Height control */
-            overflow-y: auto; /* Scrollable content */
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
             color: var(--text);
             position: relative;
             box-shadow: var(--shadow-lg);
@@ -915,7 +910,7 @@
             }
             
             .hero {
-                padding-top: 4rem; /* Added top padding */
+                padding-top: 4rem;
             }
             
             .hero-text {
@@ -931,10 +926,6 @@
                 padding: 3rem 2rem;
             }
             
-            .newsletter-form {
-                flex-direction: column;
-            }
-            
             .story-stats {
                 flex-direction: column;
                 gap: 1.5rem;
@@ -946,15 +937,15 @@
 
             /* Section spacing adjustments */
             .product {
-                padding: 3rem 5%; /* Reduced padding */
+                padding: 3rem 5%;
             }
             
             .story {
-                padding: 5rem 5%; /* Reduced padding */
+                padding: 5rem 5%;
             }
             
             .cta {
-                padding: 5rem 1rem; /* Reduced padding */
+                padding: 5rem 1rem;
             }
         }
         
@@ -964,7 +955,7 @@
             }
             
             .logo {
-                height: 30px; /* Smaller logo */
+                height: 30px;
             }
             
             .theme-toggle {
@@ -1005,17 +996,32 @@
             }
             
             .modal-content {
-                padding: 1.5rem; /* Reduced padding */
-                width: 95%; /* Wider on small screens */
+                padding: 1.5rem;
+                width: 95%;
             }
             
             .story-image {
                 height: 350px;
             }
-
-            /* Email input full width */
-            .newsletter-form input {
-                max-width: 100%;
+        }
+        
+        /* iOS specific adjustments */
+        @supports (-webkit-touch-callout: none) {
+            body {
+                -webkit-font-smoothing: antialiased;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .hero {
+                padding-top: 8vh;
+            }
+            
+            .navbar {
+                padding: 1rem 5%;
+            }
+            
+            .modal-content {
+                max-height: 70vh;
             }
         }
     </style>
@@ -1036,7 +1042,7 @@
     
     <!-- Sticky Glassmorphic Navbar -->
     <nav class="navbar">
-        <img src="images/logo.png" class="logo" alt="Jingucha Logo">
+        <img src="https://cdn-icons-png.flaticon.com/512/1532/1532556.png" class="logo" alt="Jingucha Logo">
         <div class="nav-right">
             <button id="aboutBtn">About</button>
             <button class="theme-toggle" id="themeToggle">
@@ -1050,8 +1056,15 @@
         <!-- Hero content -->
         <div class="hero-content" id="heroContent">
             <h1 class="hero-text">Awaken Your <span class="accent-color">Senses</span></h1>
-            <div class="divider"></div>
             <p class="hero-subtext">Our Essence, Redefined</p>
+            
+            <!-- New Elegant Divider -->
+            <div class="elegant-divider">
+                <div class="circle"></div>
+                <div class="divider-line"></div>
+                <div class="circle"></div>
+            </div>
+            
             <button class="btn" id="revealBtn">Reveal Nature's Legacy</button>
         </div>
     </section>
@@ -1063,7 +1076,11 @@
             <div class="product-content elevated-card" id="productContent">
                 <h2 class="product-title">Plantivinia</h2>
                 <p class="product-subtitle">"More Than Just Calcium"</p>
-                <div class="divider"></div>
+                <div class="elegant-divider">
+                    <div class="circle"></div>
+                    <div class="divider-line"></div>
+                    <div class="circle"></div>
+                </div>
                 <p class="product-desc">A premium plant-based calcium powder crafted sustainably from eggshells, enhanced with nature's finest botanicals for holistic nourishment. Our unique formula combines science and nature to deliver unparalleled wellness benefits.</p>
                 <p class="product-desc">Each batch is carefully formulated to deliver the perfect balance of minerals and nutrients, supporting bone health, muscle function, and overall vitality.</p>
                 <a href="https://wa.me/919445172773?text=I'm%20interested%20in%20buying%20Plantivinia" class="btn" target="_blank">Own the Ritual</a>
@@ -1071,7 +1088,7 @@
             
             <!-- Product image -->
             <div class="product-image-container">
-                <img src="images/mockup.webp" alt="Plantivinia Product" class="product-image elevated-card">
+                <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Plantivinia Product" class="product-image elevated-card">
             </div>
         </div>
     </section>
@@ -1101,7 +1118,7 @@
             </div>
             
             <div class="story-image elevated-card" id="founderImage">
-                <img src="images/mockup.webp" alt="Jingucha Founders">
+                <img src="https://images.unsplash.com/photo-1527525443983-6e60c75fff46?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Jingucha Founders">
             </div>
         </div>
     </section>
@@ -1179,7 +1196,11 @@
             <p>Jingucha is a celebration of nature's quiet brilliance. Our philosophy is rooted in purity and sustainability, crafting products that honor the Earth while elevating your lifestyle.</p>
             <p>Founded in 2020, we've been committed to ethical sourcing and environmentally friendly practices. Each product is carefully designed to bring you closer to nature's harmony.</p>
             <p>Our mission is to create wellness experiences that nourish both people and planet. We believe that true luxury is found in simplicity, integrity, and respect for natural rhythms.</p>
-            <div class="divider" style="margin: 1.5rem auto;"></div>
+            <div class="elegant-divider" style="margin: 1.5rem auto;">
+                <div class="circle"></div>
+                <div class="divider-line"></div>
+                <div class="circle"></div>
+            </div>
             <h3>Our Values</h3>
             <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                 <li style="margin-bottom: 0.8rem;">Sustainability as a practice, not a promise</li>

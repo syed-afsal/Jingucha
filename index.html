@@ -17,7 +17,7 @@
             --light-accent: #3fe399;
             --light-secondary: #f5f0e1;
             --light-nav-bg: rgba(252, 250, 247, 0.85);
-            --light-glass: rgba(255, 255, 255, 0.25);
+            --light-glass: rgba(255, 255, 255, 0.12); /* Reduced opacity */
             --light-beige: #f0e6d8;
             
             /* Dark Theme */
@@ -26,7 +26,7 @@
             --dark-accent: #3fe399;
             --dark-secondary: #1e1e1e;
             --dark-nav-bg: rgba(18, 18, 18, 0.85);
-            --dark-glass: rgba(0, 0, 0, 0.25);
+            --dark-glass: rgba(0, 0, 0, 0.12); /* Reduced opacity */
             --dark-beige: #2a241c;
             
             /* Current Theme - Defaults to Light */
@@ -84,8 +84,8 @@
             align-items: center;
             z-index: 1000;
             background: var(--nav-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(12px); /* Increased blur */
+            -webkit-backdrop-filter: blur(12px);
             transition: var(--transition);
             box-shadow: var(--shadow-sm);
             border-bottom: 1px solid var(--glass);
@@ -96,7 +96,10 @@
         }
         
         .logo {
-            height: 50px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 40px; /* Reduced size */
             transition: all 0.3s ease;
             cursor: pointer;
         }
@@ -105,6 +108,7 @@
             display: flex;
             align-items: center;
             gap: 1rem;
+            margin-left: auto; /* Push to right */
         }
         
         #aboutBtn {
@@ -551,8 +555,8 @@
         .newsletter-form input {
             flex: 1;
             padding: 0.9rem 1.5rem;
-            background: var(--glass);
-            border: 1px solid var(--glass);
+            background: transparent;
+            border: 1px solid var(--glass); /* Added border */
             border-radius: 50px;
             color: var(--text);
             font-family: 'DM Sans', sans-serif;
@@ -707,10 +711,12 @@
         
         .modal-content {
             background-color: var(--secondary);
-            padding: 2.5rem;
+            padding: 2rem; /* Reduced padding */
             border-radius: 12px;
-            max-width: 500px;
-            width: 90%;
+            max-width: 90%; /* Better mobile fit */
+            width: 500px;
+            max-height: 85vh; /* Height control */
+            overflow-y: auto; /* Scrollable content */
             color: var(--text);
             position: relative;
             box-shadow: var(--shadow-lg);
@@ -905,11 +911,11 @@
             }
             
             .logo {
-                height: 40px;
+                height: 35px;
             }
             
             .hero {
-                padding-top: 6rem;
+                padding-top: 4rem; /* Added top padding */
             }
             
             .hero-text {
@@ -937,6 +943,19 @@
             .story-image {
                 height: 400px;
             }
+
+            /* Section spacing adjustments */
+            .product {
+                padding: 3rem 5%; /* Reduced padding */
+            }
+            
+            .story {
+                padding: 5rem 5%; /* Reduced padding */
+            }
+            
+            .cta {
+                padding: 5rem 1rem; /* Reduced padding */
+            }
         }
         
         @media (max-width: 576px) {
@@ -945,7 +964,7 @@
             }
             
             .logo {
-                height: 35px;
+                height: 30px; /* Smaller logo */
             }
             
             .theme-toggle {
@@ -986,11 +1005,17 @@
             }
             
             .modal-content {
-                padding: 1.5rem;
+                padding: 1.5rem; /* Reduced padding */
+                width: 95%; /* Wider on small screens */
             }
             
             .story-image {
                 height: 350px;
+            }
+
+            /* Email input full width */
+            .newsletter-form input {
+                max-width: 100%;
             }
         }
     </style>
@@ -1158,7 +1183,7 @@
             <h3>Our Values</h3>
             <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
                 <li style="margin-bottom: 0.8rem;">Sustainability as a practice, not a promise</li>
-                <li style="margin-bottom: 0.8rm;">Radical transparency in sourcing and production</li>
+                <li style="margin-bottom: 0.8rem;">Radical transparency in sourcing and production</li>
                 <li style="margin-bottom: 0.8rem;">Respect for indigenous knowledge and traditions</li>
                 <li style="margin-bottom: 0.8rem;">Innovation through biomimicry and natural wisdom</li>
             </ul>

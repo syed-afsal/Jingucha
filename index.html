@@ -42,6 +42,7 @@
             --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.2);
             --shadow-accent: 0 0 25px rgba(63, 227, 153, 0.5);
+            --shadow-pop: 0 0 15px rgba(255, 255, 255, 0.15);
         }
         
         .light-theme {
@@ -999,12 +1000,52 @@
         /* Dark mode specific adjustments */
         body:not(.light-theme) .btn,
         body:not(.light-theme) #aboutBtn {
-            box-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+            box-shadow: var(--shadow-pop);
         }
         
         body:not(.light-theme) .btn:hover,
         body:not(.light-theme) #aboutBtn:hover {
             box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+        }
+        
+        body:not(.light-theme) .product-content,
+        body:not(.light-theme) .story-image,
+        body:not(.light-theme) .modal-content {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+        
+        body:not(.light-theme) .social-links a {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        
+        body:not(.light-theme) .newsletter-form input {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        
+        body:not(.light-theme) .theme-toggle {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        
+        body:not(.light-theme) #chatBtn {
+            box-shadow: 0 0 20px rgba(63, 227, 153, 0.5), 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+        
+        body:not(.light-theme) .scroll-top {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Theme Toggle Icon Styles */
+        .theme-icon {
+            transition: all 0.5s ease;
+            display: inline-block;
+        }
+        
+        .light-theme .theme-icon {
+            color: #5e8b5e;
+        }
+        
+        body:not(.light-theme) .theme-icon {
+            color: #3fe399;
         }
         
         /* Responsive Design */
@@ -1214,7 +1255,7 @@
         <div class="nav-right">
             <button id="aboutBtn">About</button>
             <button class="theme-toggle" id="themeToggle">
-                <span id="themeIcon">☀️</span>
+                <span id="themeIcon" class="theme-icon"><i class="fas fa-leaf"></i></span>
             </button>
         </div>
     </nav>
@@ -1410,21 +1451,39 @@
             const themeIcon = document.getElementById('themeIcon');
             let isLightMode = false;
             
-            // Check for saved theme preference
+            // Check for user's browser theme preference
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            // Check for saved theme preference or browser preference
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'light') {
                 isLightMode = true;
                 document.body.classList.add('light-theme');
-                themeIcon.textContent = '🌙';
+            } else if (savedTheme === 'dark') {
+                isLightMode = false;
+                document.body.classList.remove('light-theme');
+            } else if (prefersDarkScheme.matches) {
+                // Use browser preference if no saved theme
+                isLightMode = false;
+                document.body.classList.remove('light-theme');
+            } else {
+                // Default to light mode if no preference and no saved theme
+                isLightMode = true;
+                document.body.classList.add('light-theme');
             }
+            
+            // Update theme icon based on current theme
+            updateThemeIcon();
             
             themeToggle.addEventListener('click', () => {
                 isLightMode = !isLightMode;
                 document.body.classList.toggle('light-theme');
-                themeIcon.textContent = isLightMode ? '🌙' : '☀️';
                 
                 // Save theme preference
                 localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
+                
+                // Update theme icon
+                updateThemeIcon();
                 
                 // Animate theme transition
                 gsap.fromTo('body', 
@@ -1432,6 +1491,15 @@
                     { opacity: 1, duration: 0.8, ease: "power2.out" }
                 );
             });
+            
+            // Function to update theme icon
+            function updateThemeIcon() {
+                if (isLightMode) {
+                    themeIcon.innerHTML = '<i class="fas fa-seedling"></i>';
+                } else {
+                    themeIcon.innerHTML = '<i class="fas fa-leaf"></i>';
+                }
+            }
             
             // Logo elements
             const heroLogoContainer = document.getElementById('heroLogoContainer');

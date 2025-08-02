@@ -12,21 +12,21 @@
     <style>
         :root {
             /* Dark Theme as Default */
-            --dark-bg: #121212;
+            --dark-bg: #0a0a0a;
             --dark-text: #f0f0f0;
             --dark-accent: #3fe399;
-            --dark-secondary: #1e1e1e;
-            --dark-nav-bg: rgba(18, 18, 18, 0.85);
-            --dark-glass: rgba(0, 0, 0, 0.12);
-            --dark-beige: #2a241c;
+            --dark-secondary: #1a1a1a;
+            --dark-nav-bg: rgba(10, 10, 10, 0.9);
+            --dark-glass: rgba(0, 0, 0, 0.2);
+            --dark-beige: #1c1812;
             
             /* Light Theme */
             --light-bg: #fcfaf7;
             --light-text: #1a1a1a;
             --light-accent: #3fe399;
             --light-secondary: #f5f0e1;
-            --light-nav-bg: rgba(252, 250, 247, 0.85);
-            --light-glass: rgba(255, 255, 255, 0.12);
+            --light-nav-bg: rgba(252, 250, 247, 0.9);
+            --light-glass: rgba(255, 255, 255, 0.2);
             --light-beige: #f0e6d8;
             
             /* Current Theme - Defaults to Dark */
@@ -38,10 +38,10 @@
             --glass: var(--dark-glass);
             --beige: var(--dark-beige);
             
-            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.05);
-            --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.1);
-            --shadow-accent: 0 0 25px rgba(121, 210, 170, 0.862);
+            --transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.2);
+            --shadow-accent: 0 0 25px rgba(63, 227, 153, 0.5);
         }
         
         .light-theme {
@@ -70,6 +70,8 @@
             font-weight: 300;
             letter-spacing: 0.5px;
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="%238bc2a9" stroke-width="0.5" stroke-opacity="0.05" /></svg>');
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
         /* Glassmorphic Navbar */
@@ -84,23 +86,26 @@
             align-items: center;
             z-index: 1000;
             background: var(--nav-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             transition: var(--transition);
             box-shadow: var(--shadow-sm);
             border-bottom: 1px solid var(--glass);
+            will-change: transform;
         }
         
         .navbar.scrolled {
             padding: 1rem 5%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
         
         .nav-logo {
             height: 60px;
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
             cursor: pointer;
             opacity: 0;
             transform: translateY(20px);
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.2));
         }
         
         .nav-logo.visible {
@@ -111,7 +116,7 @@
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.5rem;
             margin-left: auto;
         }
         
@@ -119,43 +124,72 @@
             border: 1px solid var(--accent);
             background: transparent;
             color: var(--accent);
-            padding: 0.8rem 1.8rem;
+            padding: 0.9rem 2rem;
             border-radius: 50px;
             font-weight: 500;
             transition: var(--transition);
             cursor: pointer;
             font-family: 'DM Sans', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .light-theme #aboutBtn {
+            box-shadow: 0 0 5px rgba(63, 227, 153, 0.3);
+        }
+        
+        #aboutBtn:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
         }
         
         #aboutBtn:hover {
-            background: var(--accent);
             color: var(--bg);
             transform: translateY(-3px);
-            letter-spacing: 0.5px;
+        }
+        
+        .light-theme #aboutBtn:hover {
+            box-shadow: 0 5px 15px rgba(63, 227, 153, 0.3);
+        }
+        
+        #aboutBtn:hover:before {
+            opacity: 1;
         }
         
         .theme-toggle {
             background: var(--glass);
             border: 1px solid var(--glass);
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             cursor: pointer;
             color: var(--text);
             transition: var(--transition);
             display: flex;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
         }
         
         .theme-toggle:hover {
-            transform: rotate(15deg);
+            transform: rotate(15deg) scale(1.1);
             background: var(--accent);
             color: var(--bg);
+            box-shadow: 0 5px 15px rgba(63, 227, 153, 0.4);
         }
         
         /* Hero Section */
@@ -180,11 +214,12 @@
             top: 20%;
             transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
             z-index: 10;
+            will-change: transform, opacity;
         }
         
         .hero-logo {
             height: 115px;
-            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.1));
+            filter: drop-shadow(0 2px 15px rgba(0,0,0,0.2));
             transition: all 0.6s ease;
         }
         
@@ -194,6 +229,7 @@
             max-width: 900px;
             position: relative;
             margin-top: 100px;
+            will-change: transform, opacity;
         }
         
         .hero-text {
@@ -203,7 +239,7 @@
             letter-spacing: 1px;
             margin-bottom: 1.5rem;
             font-weight: 400;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
         }
         
         .hero-subtext {
@@ -255,18 +291,41 @@
             letter-spacing: 2px;
             font-weight: 400;
             text-transform: uppercase;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             display: inline-block;
             text-decoration: none;
+            overflow: hidden;
+        }
+        
+        .light-theme .btn {
+            box-shadow: 0 0 5px rgba(63, 227, 153, 0.3);
+        }
+        
+        .btn:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
         }
         
         .btn:hover {
-            background: var(--accent);
             color: var(--bg);
-            box-shadow: var(--shadow-accent);
             transform: translateY(-5px);
-            letter-spacing: 3px;
+        }
+        
+        .light-theme .btn:hover {
+            box-shadow: 0 5px 15px rgba(63, 227, 153, 0.3);
+        }
+        
+        .btn:hover:before {
+            opacity: 1;
         }
         
         /* Product Section */
@@ -298,8 +357,8 @@
             max-width: 600px;
             z-index: 10;
             background: var(--glass);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: 20px;
             padding: 4rem;
             box-shadow: var(--shadow-lg);
@@ -322,15 +381,16 @@
             width: 100%;
             max-width: 600px;
             height: 450px;
-            filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.3));
+            filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.4));
             transform: translateY(0);
             border-radius: 12px;
-            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
             animation: float 6s ease-in-out infinite;
+            will-change: transform;
         }
         
         .product-image:hover {
-            transform: scale(1.03);
+            transform: scale(1.03) translateY(-10px);
         }
         
         .product-title {
@@ -390,13 +450,14 @@
             transform: translateY(50px);
             opacity: 0;
             animation: float 6s ease-in-out infinite;
+            will-change: transform;
         }
         
         .story-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.8s ease;
+            transition: transform 1.2s ease;
         }
         
         .story-image:hover img {
@@ -532,11 +593,27 @@
             text-decoration: none;
             transition: var(--transition);
             opacity: 0.8;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-col ul li a:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
         }
         
         .footer-col ul li a:hover {
             color: var(--accent);
-            padding-left: 5px;
+        }
+        
+        .footer-col ul li a:hover:after {
+            width: 100%;
         }
         
         .social-links {
@@ -549,19 +626,21 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             background: var(--glass);
             border-radius: 50%;
             color: var(--text);
             transition: var(--transition);
             text-decoration: none;
+            box-shadow: var(--shadow-sm);
         }
         
         .social-links a:hover {
             background: var(--accent);
             color: var(--bg);
             transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(63, 227, 153, 0.4);
         }
         
         .footer-bottom {
@@ -597,7 +676,7 @@
             width: 100%;
             padding: 0.9rem 1.5rem;
             background: transparent;
-            border: 1px solid var(--glass); /* Added outline */
+            border: 1px solid var(--glass);
             border-radius: 50px;
             color: var(--text);
             font-family: 'DM Sans', sans-serif;
@@ -643,28 +722,29 @@
             color: var(--bg);
             border: none;
             border-radius: 50px;
-            padding: 0.75rem 1.5rem;
+            padding: 0.9rem 1.8rem;
             font-size: 1rem;
             font-weight: bold;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            box-shadow: 0 0 10px rgba(115, 216, 170, 0.607);
+            gap: 0.7rem;
+            box-shadow: 0 0 20px rgba(63, 227, 153, 0.5);
             cursor: pointer;
             z-index: 1001;
             animation: pulse 2s infinite;
             transition: var(--transition);
             font-family: 'DM Sans', sans-serif;
+            letter-spacing: 1px;
         }
         
         #chatBtn:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-accent);
-            letter-spacing: 0.5px;
+            letter-spacing: 1.5px;
         }
         
         #chatBtn .icon {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
         }
         
         /* Scroll to top button */
@@ -684,8 +764,8 @@
             z-index: 1000;
             opacity: 0;
             transform: translateY(20px);
-            transition: all 0.4s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
         
         .scroll-top.visible {
@@ -695,6 +775,7 @@
         
         .scroll-top:hover {
             transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(63, 227, 153, 0.4);
         }
         
         @keyframes pulse {
@@ -719,8 +800,9 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(4px);
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             align-items: center;
             justify-content: center;
         }
@@ -728,18 +810,18 @@
         .modal-content {
             background-color: var(--secondary);
             padding: 2.5rem;
-            border-radius: 12px;
+            border-radius: 15px;
             max-width: 500px;
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
             color: var(--text);
             position: relative;
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             border: 1px solid var(--glass);
             transform: scale(0.9);
             opacity: 0;
-            transition: all 0.4s ease;
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
         
         .modal-content.active {
@@ -772,6 +854,14 @@
             color: var(--text);
             font-family: 'DM Sans', sans-serif;
             font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .modal-content input:focus,
+        .modal-content textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(114, 215, 170, 0.381);
         }
         
         .modal-content textarea {
@@ -816,6 +906,7 @@
         
         .close-btn:hover {
             background: var(--glass);
+            transform: rotate(90deg);
         }
         
         /* Preloader */
@@ -891,18 +982,29 @@
         }
         
         .elevated-card {
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
         
         .elevated-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
         }
         
         .serif-heading {
             font-family: 'Playfair Display', serif;
             letter-spacing: 0.5px;
+        }
+        
+        /* Dark mode specific adjustments */
+        body:not(.light-theme) .btn,
+        body:not(.light-theme) #aboutBtn {
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+        }
+        
+        body:not(.light-theme) .btn:hover,
+        body:not(.light-theme) #aboutBtn:hover {
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
         }
         
         /* Responsive Design */
@@ -959,7 +1061,7 @@
             .story-image {
                 height: 400px;
             }
-
+            
             /* Section spacing adjustments */
             .product {
                 padding: 3rem 5%;
@@ -1053,6 +1155,40 @@
                 max-height: 70vh;
             }
         }
+        
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--secondary);
+            color: var(--text);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            box-shadow: var(--shadow-lg);
+            z-index: 1002;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border: 1px solid var(--glass);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            max-width: 90%;
+            text-align: center;
+        }
+        
+        .notification.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        .notification.success {
+            border-left: 4px solid var(--accent);
+        }
+        
+        .notification.error {
+            border-left: 4px solid #ff4d4d;
+        }
     </style>
 </head>
 <body>
@@ -1064,6 +1200,9 @@
         <div class="preloader-text">Rhythm of Nature</div>
     </div>
     
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+    
     <!-- Scroll to top button -->
     <div class="scroll-top" id="scrollTop">
         <i class="fas fa-arrow-up"></i>
@@ -1071,7 +1210,7 @@
     
     <!-- Sticky Glassmorphic Navbar -->
     <nav class="navbar">
-        <img src="images/logo.png" class="nav-logo" alt="Jingucha Logo" id="navLogo">
+        <img src="https://via.placeholder.com/200x80/3fe399/0a0a0a?text=JINGUCHA" class="nav-logo" alt="Jingucha Logo" id="navLogo">
         <div class="nav-right">
             <button id="aboutBtn">About</button>
             <button class="theme-toggle" id="themeToggle">
@@ -1084,7 +1223,7 @@
     <section class="hero textured-bg">
         <!-- Hero logo -->
         <div class="hero-logo-container" id="heroLogoContainer">
-            <img src="images/logo.png" class="hero-logo" alt="Jingucha Logo" id="heroLogo">
+            <img src="https://via.placeholder.com/200x80/3fe399/0a0a0a?text=JINGUCHA" class="hero-logo" alt="Jingucha Logo" id="heroLogo">
         </div>
         
         <!-- Hero content -->
@@ -1122,7 +1261,7 @@
             
             <!-- Product image -->
             <div class="product-image-container">
-                <img src="images/mockup.webp" alt="Plantivinia Product" class="product-image elevated-card">
+                <img src="https://via.placeholder.com/600x450/3fe399/0a0a0a?text=Plantivinia+Product" alt="Plantivinia Product" class="product-image elevated-card">
             </div>
         </div>
     </section>
@@ -1160,7 +1299,7 @@
     <!-- CTA Section -->
     <section class="cta textured-bg" id="cta">
         <h2>Rhythm Of <span class="accent-color">Nature</span></h2>
-        <p>Jingucha is a celebration of nature’s quiet brilliance — a brand where sustainability is not just a promise, but a philosophy. Rooted in purity, we craft timeless products that honour the Earth while elevating your lifestyle.</p>
+        <p>Jingucha is a celebration of nature's quiet brilliance — a brand where sustainability is not just a promise, but a philosophy. Rooted in purity, we craft timeless products that honour the Earth while elevating your lifestyle.</p>
         <button class="btn">Join Our Journey</button>
     </section>
     
@@ -1203,7 +1342,7 @@
             <div class="footer-col">
                 <h4>Newsletter</h4>
                 <p>Subscribe for exclusive updates and wellness insights.</p>
-                <form class="newsletter-form">
+                <form class="newsletter-form" id="newsletterForm">
                     <input type="email" placeholder="Your email address" required>
                     <button type="submit">Subscribe</button>
                 </form>
@@ -1249,7 +1388,7 @@
         <div class="modal-content">
             <span id="closeModal" class="close-btn">&times;</span>
             <h2>Contact Us</h2>
-            <form id="contactForm" action="mailto:jingucha22@gmail.com" method="post" enctype="text/plain">
+            <form id="contactForm">
                 <input type="text" name="name" placeholder="Your Name" required>
                 <input type="email" name="email" placeholder="Your Email" required>
                 <textarea name="message" placeholder="Your Message" required></textarea>
@@ -1264,17 +1403,28 @@
             const preloader = document.getElementById('preloader');
             setTimeout(() => {
                 preloader.classList.add('hidden');
-            }, 2000);
+            }, 2500);
             
             // Theme Toggle
             const themeToggle = document.getElementById('themeToggle');
             const themeIcon = document.getElementById('themeIcon');
             let isLightMode = false;
             
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                isLightMode = true;
+                document.body.classList.add('light-theme');
+                themeIcon.textContent = '🌙';
+            }
+            
             themeToggle.addEventListener('click', () => {
                 isLightMode = !isLightMode;
                 document.body.classList.toggle('light-theme');
                 themeIcon.textContent = isLightMode ? '🌙' : '☀️';
+                
+                // Save theme preference
+                localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
                 
                 // Animate theme transition
                 gsap.fromTo('body', 
@@ -1297,62 +1447,70 @@
             let logoMoved = false;
             let scrollThreshold = 100;
             
+            // Throttle scroll events for better performance
+            let scrollTimeout;
             window.addEventListener('scroll', function() {
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                
-                // Navbar shrink effect
-                if (scrollTop > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
+                if (scrollTimeout) {
+                    window.cancelAnimationFrame(scrollTimeout);
                 }
                 
-                // Logo animation logic
-                if (scrollTop > scrollThreshold && !logoMoved) {
-                    // Move logo to navbar
-                    gsap.to(heroLogoContainer, {
-                        opacity: 0,
-                        y: -50,
-                        duration: 0.8,
-                        ease: "power2.out",
-                        onComplete: () => {
-                            heroLogoContainer.style.display = 'none';
-                        }
-                    });
+                scrollTimeout = window.requestAnimationFrame(function() {
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                     
-                    gsap.to(navLogo, {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.8,
-                        delay: 0.2,
-                        ease: "power2.out"
-                    });
+                    // Navbar shrink effect
+                    if (scrollTop > 50) {
+                        navbar.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                    }
                     
-                    navLogo.classList.add('visible');
-                    logoMoved = true;
-                }
-                else if (scrollTop <= scrollThreshold && logoMoved) {
-                    // Move logo back to hero
-                    heroLogoContainer.style.display = 'block';
+                    // Logo animation logic
+                    if (scrollTop > scrollThreshold && !logoMoved) {
+                        // Move logo to navbar
+                        gsap.to(heroLogoContainer, {
+                            opacity: 0,
+                            y: -50,
+                            duration: 0.8,
+                            ease: "power2.out",
+                            onComplete: () => {
+                                heroLogoContainer.style.display = 'none';
+                            }
+                        });
+                        
+                        gsap.to(navLogo, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.8,
+                            delay: 0.2,
+                            ease: "power2.out"
+                        });
+                        
+                        navLogo.classList.add('visible');
+                        logoMoved = true;
+                    }
+                    else if (scrollTop <= scrollThreshold && logoMoved) {
+                        // Move logo back to hero
+                        heroLogoContainer.style.display = 'block';
+                        
+                        gsap.to(navLogo, {
+                            opacity: 0,
+                            y: 20,
+                            duration: 0.6,
+                            ease: "power2.out"
+                        });
+                        
+                        gsap.to(heroLogoContainer, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.8,
+                            ease: "power2.out"
+                        });
+                        
+                        logoMoved = false;
+                    }
                     
-                    gsap.to(navLogo, {
-                        opacity: 0,
-                        y: 20,
-                        duration: 0.6,
-                        ease: "power2.out"
-                    });
-                    
-                    gsap.to(heroLogoContainer, {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.8,
-                        ease: "power2.out"
-                    });
-                    
-                    logoMoved = false;
-                }
-                
-                lastScrollTop = scrollTop;
+                    lastScrollTop = scrollTop;
+                });
             });
             
             // Initialize GSAP plugins
@@ -1438,23 +1596,28 @@
             
             // Reveal button scroll to product
             revealBtn.addEventListener('click', function() {
-                this.classList.add('btn-clicked');
                 gsap.to(window, {
                     duration: 1.8,
                     scrollTo: "#productSection",
                     ease: "power2.inOut"
                 });
-                setTimeout(() => {
-                    this.classList.remove('btn-clicked');
-                }, 2000);
             });
             
-            // Own the Ritual button reset
+            // Own the Ritual button
             document.querySelector('.product-content .btn').addEventListener('click', function() {
-                this.classList.add('btn-clicked');
-                setTimeout(() => {
-                    this.classList.remove('btn-clicked');
-                }, 2000);
+                // Add click animation
+                gsap.to(this, {
+                    scale: 0.95,
+                    duration: 0.1,
+                    ease: "power2.out",
+                    onComplete: () => {
+                        gsap.to(this, {
+                            scale: 1,
+                            duration: 0.1,
+                            ease: "power2.out"
+                        });
+                    }
+                });
             });
             
             // Modal handling
@@ -1470,10 +1633,6 @@
                 setTimeout(() => {
                     document.querySelector('#aboutModal .modal-content').classList.add('active');
                 }, 10);
-                this.classList.add('btn-clicked');
-                setTimeout(() => {
-                    this.classList.remove('btn-clicked');
-                }, 2000);
             });
             
             chatBtn.addEventListener('click', function() {
@@ -1481,10 +1640,6 @@
                 setTimeout(() => {
                     document.querySelector('#contactModal .modal-content').classList.add('active');
                 }, 10);
-                this.classList.add('btn-clicked');
-                setTimeout(() => {
-                    this.classList.remove('btn-clicked');
-                }, 2000);
             });
             
             closeModal.addEventListener('click', () => {
@@ -1528,17 +1683,81 @@
             });
             
             scrollTopBtn.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
+                gsap.to(window, {
+                    duration: 1.2,
+                    scrollTo: 0,
+                    ease: "power2.inOut"
                 });
             });
+            
+            // Newsletter form submission
+            const newsletterForm = document.getElementById('newsletterForm');
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = this.querySelector('input[type="email"]').value;
+                
+                // Show notification
+                showNotification('Thank you for subscribing!', 'success');
+                
+                // Reset form
+                this.reset();
+            });
+            
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const name = this.querySelector('input[name="name"]').value;
+                const email = this.querySelector('input[name="email"]').value;
+                const message = this.querySelector('textarea[name="message"]').value;
+                
+                // Show notification
+                showNotification('Your message has been sent successfully!', 'success');
+                
+                // Reset form and close modal
+                this.reset();
+                document.querySelector('#contactModal .modal-content').classList.remove('active');
+                setTimeout(() => {
+                    contactModal.style.display = 'none';
+                }, 300);
+            });
+            
+            // Notification function
+            function showNotification(message, type) {
+                const notification = document.getElementById('notification');
+                notification.textContent = message;
+                notification.className = 'notification ' + type;
+                
+                // Show notification
+                setTimeout(() => {
+                    notification.classList.add('show');
+                }, 10);
+                
+                // Hide notification after 3 seconds
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
             
             // Set initial states
             gsap.set("#productContent", { opacity: 0, y: 30 });
             gsap.set(".product-image", { opacity: 0, y: 30 });
             gsap.set("#founderImage", { opacity: 0, y: 50 });
             gsap.set(navLogo, { opacity: 0, y: 20 });
+            
+            // Add parallax effect to story image
+            gsap.to("#founderImage img", {
+                scrollTrigger: {
+                    trigger: "#founderImage",
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 1
+                },
+                yPercent: -20,
+                ease: "none"
+            });
         });
     </script>
 </body>

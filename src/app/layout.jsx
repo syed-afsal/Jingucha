@@ -1,18 +1,20 @@
-import { Playfair_Display, DM_Sans, Lora } from 'next/font/google';
+import { Syncopate, Comfortaa } from 'next/font/google';
 import './globals.css';
 
-const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' });
-const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-dm-sans', weight: ['300', '400', '500', '700'] });
-const lora = Lora({ subsets: ['latin'], variable: '--font-lora', style: ['normal', 'italic'] });
+const syncopate = Syncopate({ subsets: ['latin'], variable: '--font-heading', weight: ['400', '700'] });
+const comfortaa = Comfortaa({ subsets: ['latin'], variable: '--font-body', weight: ['300', '400', '600', '700'] });
 
 export const metadata = {
   title: 'Jingucha | Rhythm of Nature',
-  description: 'Experience Plantivinia — a premium plant-based calcium crafted sustainably from eggshells and nature\'s finest botanicals.',
+  description: 'Experience Plantivinia — a premium calcium elixir derived from upcycled eggshells, designed to nourish and elevate your plants.',
+  icons: {
+    icon: '/images/logo.png',
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${dmSans.variable} ${lora.variable}`}>
+    <html lang="en" className={`${syncopate.variable} ${comfortaa.variable}`}>
       <body>
         {children}
       </body>

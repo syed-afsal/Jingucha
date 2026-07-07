@@ -15,28 +15,34 @@ export default function Philosophy() {
           trigger: sectionRef.current,
           start: "top 80%",
         },
-        y: 30,
+        y: 50,
         opacity: 0,
-        duration: 0.8,
+        duration: 1,
         stagger: 0.2,
-        ease: 'power2.out'
+        ease: 'power3.out'
       });
     }, sectionRef);
-
     return () => ctx.revert();
   }, []);
 
   return (
-    <section className="philosophy" id="philosophy" ref={sectionRef} style={{ background: 'var(--bg)', padding: '8rem 5vw', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
-      <div ref={textRef} style={{ maxWidth: '800px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
-        <p style={{ color: 'var(--accent)', fontFamily: 'var(--font-dm-sans)', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.85rem', fontWeight: '600', marginBottom: '1rem' }}>Our Philosophy</p>
-        <h2 style={{ fontSize: 'clamp(2.2rem, 4vw, 3.5rem)', fontFamily: 'var(--font-playfair)', fontWeight: '400', color: 'var(--text)', lineHeight: 1.2, marginBottom: '2rem' }}>Harmony with nature is not just an ideal — it is our foundation.</h2>
-        <p style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '1.15rem', color: 'var(--text)', opacity: 0.7, lineHeight: 1.8 }}>
-          We believe that true wellness comes from the earth. By sustainably sourcing our calcium from eggshells and enriching it with time-honored botanicals, we create products that are as pure as they are potent. Jingucha is a tribute to the delicate balance of the natural world.
+    <section id="philosophy" ref={sectionRef} style={{ background: 'transparent', padding: '10rem 5%', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+      
+      {/* Dark luxury background glow */}
+      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '800px', height: '800px', background: 'radial-gradient(circle, rgba(29, 58, 54, 0.4) 0%, transparent 60%)', zIndex: 0 }}></div>
+
+      <div ref={textRef} style={{ maxWidth: '900px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
+        <p style={{ color: 'var(--accent)', fontFamily: 'var(--font-heading)', textTransform: 'uppercase', letterSpacing: '4px', fontSize: '0.85rem', fontWeight: '800', marginBottom: '2rem' }}>
+          Our Philosophy
+        </p>
+        <h2 style={{ fontSize: 'clamp(2rem, 5vw, 4.5rem)', fontFamily: 'var(--font-heading)', fontWeight: '800', color: 'var(--text)', lineHeight: 1.1, marginBottom: '3rem', textTransform: 'uppercase', letterSpacing: '-1px' }}>
+          Harmony with nature is not an ideal.<br/>
+          <span style={{ color: 'transparent', WebkitTextStroke: '1px rgba(255,255,255,0.5)' }}>It is our foundation.</span>
+        </h2>
+        <p className="subtitle-text" style={{ margin: '0 auto', fontSize: '1.2rem' }}>
+          We believe true vitality is cultivated from the earth. By upcycling eggshells into a nutrient-rich calcium elixir, we deliver uncompromising nourishment directly to your plants.
         </p>
       </div>
-      <div style={{ position: 'absolute', top: '-10%', left: '-10%', width: '400px', height: '400px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%)', zIndex: 1 }}></div>
-      <div style={{ position: 'absolute', bottom: '-10%', right: '-10%', width: '500px', height: '500px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)', zIndex: 1 }}></div>
     </section>
   );
 }

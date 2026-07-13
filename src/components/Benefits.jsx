@@ -34,7 +34,7 @@ export default function Benefits() {
   };
 
   return (
-    <section id="benefits" ref={sectionRef} style={{ background: 'transparent', padding: '10rem 5vw' }}>
+    <section id="benefits" ref={sectionRef} style={{ background: 'transparent', padding: 'clamp(5rem, 15vw, 10rem) 5vw' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '6rem' }}>
           <p style={{ color: 'var(--accent)', fontFamily: 'var(--font-heading)', textTransform: 'uppercase', letterSpacing: '4px', fontSize: '0.85rem', fontWeight: '800', marginBottom: '1rem' }}>
@@ -45,7 +45,7 @@ export default function Benefits() {
           </h2>
         </div>
         
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '2rem' }}>
           
           <div className="glass-card" ref={addToCards} style={{ transition: 'transform 0.4s ease', cursor: 'pointer' }} onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-10px)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
             <div style={{ color: 'var(--accent)', marginBottom: '2rem' }}>

@@ -48,7 +48,7 @@ export default function Preorder() {
   return (
     <main style={{ background: 'transparent', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Navbar />
-      <section style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '10rem 5vw' }}>
+      <section style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 'clamp(5rem, 15vw, 10rem) 5vw' }}>
         <div className="glass-card" style={{ width: '100%', maxWidth: '500px' }}>
           <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: '3rem', fontWeight: '800', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '-1px' }}>
             Pre-Order

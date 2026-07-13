@@ -26,7 +26,7 @@ export default function Philosophy() {
   }, []);
 
   return (
-    <section id="philosophy" ref={sectionRef} style={{ background: 'transparent', padding: '10rem 5%', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+    <section id="philosophy" ref={sectionRef} style={{ background: 'transparent', padding: 'clamp(5rem, 15vw, 10rem) 5%', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
       
       {/* Dark luxury background glow */}
       <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '800px', height: '800px', background: 'radial-gradient(circle, rgba(29, 58, 54, 0.4) 0%, transparent 60%)', zIndex: 0 }}></div>

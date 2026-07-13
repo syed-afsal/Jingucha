@@ -69,7 +69,7 @@ export default function ProductSection() {
         PLANTIVINIA
       </div>
 
-      <div style={{ maxWidth: '1200px', width: '100%', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', alignItems: 'center', gap: '3rem', zIndex: 2, position: 'relative' }}>
+      <div style={{ maxWidth: '1200px', width: '100%', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', alignItems: 'center', gap: '3rem', zIndex: 2, position: 'relative' }}>
         
         <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '2rem' }}>
           <img 
